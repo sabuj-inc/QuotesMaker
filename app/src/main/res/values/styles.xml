@@ -1,0 +1,204 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--Edit CardView-->
+    <style name="createCardStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/five</item>
+        <item name="cardCornerRadius">@dimen/five</item>
+        <item name="cardElevation">1dp</item>
+    </style>
+    <!--Create Control Layout-->
+    <style name="createControlLayoutStyle">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/click_background</item>
+    </style>
+
+
+    <style name="createImageStyle">
+        <item name="android:contentDescription">@string/todo</item>
+        <item name="android:padding">@dimen/ten</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/click_background</item>
+    </style>
+    <style name="createControlImageStyle">
+        <item name="android:layout_width">@dimen/forty</item>
+        <item name="android:layout_height">@dimen/forty</item>
+    </style>
+
+    <style name="createTextStyle" parent="createImageStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/zero</item>
+
+    </style>
+
+
+    <style name="createControlLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/ten</item>
+    </style>
+
+    <style name="canvasTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#fff</item>
+
+
+    </style>
+
+    <!--color seekBar-->
+    <style name="createColorSeekBar">
+        <item name="android:layout_width">@dimen/zero</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="thumbBorder">3dp</item>
+        <item name="android:layout_marginLeft">@dimen/five</item>
+        <item name="android:layout_marginRight">@dimen/five</item>
+        <item name="android:layout_weight">8</item>
+    </style>
+
+
+    <style name="textSpacingStyle">
+        <item name="android:layout_width">@dimen/forty</item>
+        <item name="android:layout_height">@dimen/forty</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/click_background</item>
+        <item name="android:layout_margin">@dimen/five</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <!--layout head text-->
+    <style name="createLayoutHeadText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/forty</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <!--layout sub text-->
+    <style name="createTitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:layout_marginLeft">@dimen/ten</item>
+        <item name="android:layout_marginBottom">@dimen/five</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="createSmallText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <!--close layout-->
+    <style name="createCloseLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">#DCD9D9</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!--close icon-->
+    <style name="createCloseIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/arrow_down_icon</item>
+    </style>
+    <!--seek bar-->
+
+    <style name="createSeekBarStyle">
+        <item name="android:splitTrack">false</item>
+        <item name="android:progressDrawable">@drawable/seekbar_style</item>
+        <item name="android:thumb">@drawable/custom_thumb</item>
+        <item name="android:layout_width">@dimen/zero</item>
+        <item name="android:layout_height">@dimen/forty</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:max">255</item>
+        <item name="android:layout_weight">8</item>
+    </style>
+
+
+    <!--card view-->
+    <style name="createMainLayoutCardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">300dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginLeft">@dimen/five</item>
+        <item name="android:layout_marginRight">@dimen/five</item>
+        <item name="android:visibility">gone</item>
+        <item name="cardCornerRadius">@dimen/ten</item>
+        <item name="cardElevation">@dimen/five</item>
+    </style>
+
+    <style name="createSubLayoutCardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/five</item>
+        <item name="cardCornerRadius">@dimen/ten</item>
+        <item name="cardElevation">@dimen/two</item>
+    </style>
+
+    <!--edit view-->
+    <style name="editStyle">
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:elevation">@dimen/two</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:gravity">top|left</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColorHint">@color/editHintColor</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:layout_margin">@dimen/ten</item>
+        <item name="android:background">@drawable/round_shap</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!--customize section-->
+
+    <!--customize layout-->
+    <style name="customizeLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="customizeLayoutText">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:layout_width">@dimen/zero</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">2</item>
+    </style>
+
+
+    <style name="customizeSwitch">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">@dimen/ten</item>
+        <item name="android:checked">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!--create custom color-->
+    <color name="propertyListColor">#DCD9D9</color>
+    <color name="editSelectColor">#EFECEC</color>
+    <color name="iconColor">#504B4B</color>
+    <color name="seekBarColor">#5A6A05</color>
+    <color name="textColor">#504B4B</color>
+    <color name="editHintColor">#7C6969</color>
+
+
+
+</resources>

@@ -1,0 +1,1104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F3F3"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!--head canvas-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/topSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/createBack"
+                    style="@style/createImageStyle"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/back_icon" />
+
+                <ImageView
+                    android:id="@+id/createShare"
+                    style="@style/createImageStyle"
+                    android:layout_toStartOf="@+id/createWallpaper"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/share_icon" />
+
+                <ImageView
+                    android:id="@+id/createWallpaper"
+                    style="@style/createImageStyle"
+                    android:layout_toStartOf="@+id/createDownload"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/wallpaper_icon" />
+
+                <ImageView
+                    android:id="@+id/createDownload"
+                    style="@style/createImageStyle"
+                    android:layout_alignParentEnd="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/download_icon" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--main canvas-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mainCanvas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topSection"
+            android:layout_margin="@dimen/five"
+            app:cardCornerRadius="@dimen/ten"
+            app:cardElevation="@dimen/five">
+
+            <RelativeLayout
+                android:id="@+id/saveScreen"
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+                <ImageView
+                    android:id="@+id/canvasBackgroundImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg9" />
+
+                <ImageView
+                    android:id="@+id/fakeImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/bg9"
+                    android:visibility="gone" />
+
+
+                <LinearLayout
+                    android:id="@+id/canvasBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center">
+
+                    <RelativeLayout
+                        android:id="@+id/reSizeCanvas"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#0F000000">
+
+                        <TextView
+                            android:id="@+id/firstComma"
+                            style="@style/canvasTextViewStyle"
+                            android:layout_above="@id/mainTextId"
+                            android:layout_marginStart="@dimen/five"
+                            android:layout_marginBottom="-10dp"
+                            android:text="@string/first_comma"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/secondComma"
+                            style="@style/canvasTextViewStyle"
+                            android:layout_below="@id/mainTextId"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="-18dp"
+                            android:layout_marginEnd="@dimen/five"
+                            android:text="@string/secend_comma"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/mainTextId"
+                            style="@style/canvasTextViewStyle"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="@dimen/ten"
+                            android:layout_marginRight="@dimen/ten"
+                            android:text="@string/main_text"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/mainSubText"
+                            style="@style/canvasTextViewStyle"
+                            android:layout_below="@+id/secondComma"
+                            android:layout_centerInParent="true"
+                            android:text="@string/othore_name"
+                            android:textSize="@dimen/fifteen" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/canvasTextViewStyle"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="sans-serif-condensed"
+                    android:padding="@dimen/ten"
+                    android:text="@string/app_owner"
+                    android:textSize="@dimen/fifteen" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--control section-->
+        <LinearLayout
+            android:id="@+id/mainControl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/ten"
+            android:visibility="visible">
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                tools:ignore="UselessParent">
+
+                <LinearLayout style="@style/customizeLayout">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/pictureListId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout
+
+                            style="@style/createControlLayoutStyle">
+
+                            <ImageView
+                                style="@style/createControlImageStyle"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/image_icon" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/picture" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/textEditId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout style="@style/createControlLayoutStyle">
+
+                            <ImageView
+                                style="@style/createControlImageStyle"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/text_edit_icon" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/edit_text" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/textSizeId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout style="@style/createControlLayoutStyle">
+
+                            <ImageView
+                                style="@style/createControlImageStyle"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/textsize_icon" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/text_size" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/colorId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout style="@style/createControlLayoutStyle">
+
+                            <ImageView
+                                style="@style/createControlImageStyle"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/color_icon" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/color" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fontListId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout style="@style/createControlLayoutStyle">
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/font_F"
+                                android:textSize="25sp" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/fonts" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/effectId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout style="@style/createControlLayoutStyle">
+
+                            <ImageView
+                                style="@style/createControlImageStyle"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/effect_icon" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/effect" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/filterId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout
+
+                            style="@style/createControlLayoutStyle">
+
+                            <ImageView
+                                style="@style/createControlImageStyle"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/bg2" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/filter" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/propertyId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout
+
+                            style="@style/createControlLayoutStyle">
+
+                            <ImageView
+                                style="@style/createControlImageStyle"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/center_icon" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/property" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/shadowId"
+                        style="@style/createCardStyle">
+
+                        <LinearLayout
+
+                            style="@style/createControlLayoutStyle">
+
+                            <ImageView
+                                style="@style/createControlImageStyle"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/seekbar_style" />
+
+                            <TextView
+                                style="@style/createSmallText"
+                                android:text="@string/shadow" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+            </HorizontalScrollView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--background list dialog-->
+    <LinearLayout
+        android:id="@+id/backgroundList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/ten"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout style="@style/customizeLayout">
+
+            <ImageView
+                android:id="@+id/backgroundBack"
+                style="@style/createImageStyle"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/back_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/backgroundBack"
+                android:text="@string/background"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/galleryOpenId"
+                style="@style/createImageStyle"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/gallery_icon" />
+
+        </RelativeLayout>
+
+        <GridView
+            android:id="@+id/backgroundGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:listSelector="@android:color/white"
+            android:numColumns="2" />
+    </LinearLayout>
+
+    <!--edit dialog-->
+    <LinearLayout
+        android:id="@+id/editLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/ten"
+        android:paddingRight="@dimen/ten"
+        android:visibility="gone">
+
+        <RelativeLayout
+            style="@style/customizeLayout"
+            android:padding="@dimen/five">
+
+            <ImageView
+                android:id="@+id/closeEditText"
+                style="@style/createImageStyle"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/close_icon" />
+
+            <ImageView
+                android:id="@+id/cleanEditText"
+                style="@style/createImageStyle"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/delete_icon" />
+
+            <ImageView
+                android:id="@+id/submitEditText"
+                style="@style/createImageStyle"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/right_icon" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/messageEditText"
+            style="@style/editStyle"
+            android:hint="@string/message"
+            android:maxLines="5"
+            android:minLines="5" />
+
+        <EditText
+            android:id="@+id/whoSayId"
+            style="@style/editStyle"
+            android:hint="@string/person_name"
+            android:maxLines="2"
+            android:minLines="2" />
+
+        <ImageView
+            android:id="@+id/editRandomTxt"
+            style="@style/createImageStyle"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/edit_rendomset_icon" />
+
+    </LinearLayout>
+
+    <!--font size-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/textSizeLayout"
+        style="@style/createMainLayoutCardView"
+        android:layout_height="200dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                style="@style/createLayoutHeadText"
+                android:text="@string/font_size" />
+
+            <SeekBar
+                android:id="@+id/textSizeSeekBar"
+                style="@style/createSeekBarStyle"
+                android:layout_width="match_parent"
+                android:max="30"
+                android:min="15" />
+
+            <LinearLayout
+                android:id="@+id/textSizeClose"
+                style="@style/createCloseLayout">
+
+                <ImageView
+                    android:id="@+id/textSizeCloseIcon"
+                    style="@style/createCloseIcon"
+                    android:contentDescription="@string/app_name" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!--color dialog-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/colorLayout"
+        style="@style/createMainLayoutCardView"
+        android:layout_height="@dimen/twoHundredFifty">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout style="@style/createControlLayout">
+
+                <TextView
+                    style="@style/createTitleTextStyle"
+                    android:text="@string/text_color" />
+
+                <com.divyanshu.colorseekbar.ColorSeekBar
+                    android:id="@+id/textColorSeekBar"
+                    style="@style/createColorSeekBar"
+                    android:layout_width="match_parent" />
+
+                <TextView
+                    style="@style/createTitleTextStyle"
+                    android:text="@string/background_color" />
+
+                <com.divyanshu.colorseekbar.ColorSeekBar
+                    android:id="@+id/backgroundColorSeekBar"
+                    style="@style/createColorSeekBar"
+                    android:layout_width="match_parent" />
+
+                <TextView
+                    style="@style/createTitleTextStyle"
+                    android:text="@string/background_color_opacity" />
+
+                <SeekBar
+                    android:id="@+id/backgroundColorOpacitySeekBar"
+                    style="@style/createSeekBarStyle"
+                    android:layout_width="match_parent" />
+
+            </LinearLayout>
+            <!--close color layout-->
+            <LinearLayout
+                android:id="@+id/colorClose"
+                style="@style/createCloseLayout">
+
+                <ImageView
+                    android:id="@+id/colorCloseIcon"
+                    style="@style/createCloseIcon"
+                    android:contentDescription="@string/app_name" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!--property dialog-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/propertyLayout"
+        style="@style/createMainLayoutCardView">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/propertyTxt"
+                style="@style/createLayoutHeadText"
+                android:text="@string/property" />
+
+            <ImageView
+                android:id="@+id/textStyleReset"
+                style="@style/createImageStyle"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/restore_icon" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/propertyTxt"
+                android:layout_marginBottom="@dimen/forty">
+
+                <LinearLayout
+                    android:padding="@dimen/five"
+                    style="@style/createControlLayout">
+
+                    <!--text style and flip-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <!--text style-->
+                        <androidx.cardview.widget.CardView
+                            style="@style/createSubLayoutCardView"
+                            android:layout_width="0dp"
+                            android:layout_weight="@dimen/onlyOne">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/textStyle"
+                                    style="@style/createLayoutHeadText"
+                                    android:text="@string/text_style" />
+
+                                <LinearLayout
+                                    android:layout_centerInParent="true"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/textStyle">
+
+                                    <TextView
+                                        android:id="@+id/textBold"
+                                        style="@style/createTextStyle"
+                                        android:text="@string/bold"
+                                        android:textStyle="bold"/>
+
+                                    <TextView
+                                        android:id="@+id/textItalic"
+                                        style="@style/createTextStyle"
+                                        android:layout_marginStart="@dimen/ten"
+                                        android:text="@string/italic"
+                                        android:textStyle="italic" />
+
+                                    <TextView
+                                        android:id="@+id/textBoldItalic"
+                                        style="@style/createTextStyle"
+                                        android:layout_marginStart="@dimen/ten"
+                                        android:text="@string/both"
+                                        android:textStyle="bold|italic" />
+                                </LinearLayout>
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+                        <!--image flip-->
+                        <androidx.cardview.widget.CardView
+                            style="@style/createSubLayoutCardView"
+                            android:layout_width="@dimen/zero"
+                            android:layout_weight="@dimen/onlyOne">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/flip"
+                                    style="@style/createLayoutHeadText"
+                                    android:text="@string/image_flip" />
+
+                                <ImageView
+                                    android:id="@+id/flip1"
+                                    style="@style/createImageStyle"
+                                    android:layout_below="@+id/flip"
+                                    android:contentDescription="@string/app_name"
+                                    android:rotation="90"
+                                    android:src="@drawable/flip_icon" />
+
+                                <ImageView
+                                    android:id="@+id/flip2"
+                                    style="@style/createImageStyle"
+                                    android:layout_below="@+id/flip"
+                                    android:layout_alignParentEnd="true"
+                                    android:contentDescription="@string/app_name"
+                                    android:src="@drawable/flip_icon" />
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <!--letter style-->
+                        <androidx.cardview.widget.CardView
+                            style="@style/createSubLayoutCardView"
+                            android:layout_width="0dp"
+                            android:layout_weight="@dimen/onlyOne">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/letter_spacing"
+                                    style="@style/createLayoutHeadText"
+                                    android:text="@string/letter_spacing" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/letter_spacing"
+                                    android:layout_centerInParent="true">
+
+                                    <TextView
+                                        android:id="@+id/letterSpaceMinus"
+                                        style="@style/textSpacingStyle"
+                                        android:text="-"/>
+
+                                    <TextView
+                                        android:id="@+id/letterSpaceCount"
+                                        style="@style/textSpacingStyle"
+                                        android:text="0"
+                                        android:layout_margin="@dimen/zero"
+                                        android:textSize="@dimen/fifteen" />
+
+                                    <TextView
+                                        android:id="@+id/letterSpacePlus"
+                                        style="@style/textSpacingStyle"
+                                        android:text="+"/>
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/createSubLayoutCardView"
+                            android:layout_width="0dp"
+                            android:layout_weight="@dimen/onlyOne">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/line_spacing"
+                                    style="@style/createLayoutHeadText"
+                                    android:text="@string/line_spacing" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/line_spacing"
+                                    android:layout_centerInParent="true">
+
+                                    <TextView
+                                        android:id="@+id/lineSpaceMinus"
+                                        style="@style/textSpacingStyle"
+                                        android:text="-"/>
+
+                                    <TextView
+                                        android:id="@+id/lineSpaceCount"
+                                        style="@style/textSpacingStyle"
+                                        android:layout_margin="@dimen/zero"
+                                        android:text="0"
+                                        android:textSize="@dimen/fifteen" />
+
+                                    <TextView
+                                        android:id="@+id/lineSpacePlus"
+                                        style="@style/textSpacingStyle"
+                                        android:text="+"/>
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+
+                    <!--canvas customize-->
+                    <androidx.cardview.widget.CardView style="@style/createSubLayoutCardView">
+
+                        <LinearLayout style="@style/createControlLayout">
+
+                            <TextView
+                                style="@style/createLayoutHeadText"
+                                android:text="@string/canvas_customize" />
+
+                            <LinearLayout style="@style/customizeLayout">
+
+                                <TextView
+                                    style="@style/customizeLayoutText"
+                                    android:text="@string/width" />
+
+                                <SeekBar
+                                    android:id="@+id/customizeWidth"
+                                    style="@style/createSeekBarStyle" />
+                            </LinearLayout>
+
+                            <LinearLayout style="@style/customizeLayout">
+
+                                <TextView
+                                    style="@style/customizeLayoutText"
+                                    android:text="@string/height" />
+
+                                <SeekBar
+                                    android:id="@+id/customizeHeight"
+                                    style="@style/createSeekBarStyle"
+                                    android:max="400" />
+                            </LinearLayout>
+
+                            <LinearLayout style="@style/customizeLayout">
+
+                                <TextView
+                                    style="@style/customizeLayoutText"
+                                    android:text="@string/color" />
+
+                                <com.divyanshu.colorseekbar.ColorSeekBar
+                                    android:id="@+id/customizeColor"
+                                    style="@style/createColorSeekBar" />
+
+                            </LinearLayout>
+
+                            <LinearLayout style="@style/customizeLayout">
+
+                                <TextView
+                                    style="@style/customizeLayoutText"
+                                    android:text="@string/opacity" />
+
+                                <SeekBar
+                                    android:id="@+id/customizeOpacity"
+                                    style="@style/createSeekBarStyle" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!--hide show switch-->
+                    <LinearLayout style="@style/customizeLayout">
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/createSubLayoutCardView"
+                            android:layout_width="0dp"
+                            android:layout_weight="@dimen/onlyOne">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fifty">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:paddingStart="@dimen/five"
+                                    android:text="@string/dubble_comma" />
+
+
+                                <com.google.android.material.switchmaterial.SwitchMaterial
+                                    android:id="@+id/commaSwitch"
+                                    style="@style/customizeSwitch" />
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/createSubLayoutCardView"
+                            android:layout_width="0dp"
+                            android:layout_weight="@dimen/onlyOne">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fifty">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:paddingStart="@dimen/five"
+                                    android:text="@string/who_say" />
+
+                                <com.google.android.material.switchmaterial.SwitchMaterial
+                                    android:id="@+id/whoSaySwitch"
+                                    style="@style/customizeSwitch" />
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!--property hide-->
+            <LinearLayout
+                android:id="@+id/propertyClose"
+                style="@style/createCloseLayout">
+
+                <ImageView
+                    android:id="@+id/propertyCloseIcon"
+                    style="@style/createCloseIcon"
+                    android:contentDescription="@string/app_name" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!--shadow dialog-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/shadowLayout"
+        style="@style/createMainLayoutCardView"
+        android:layout_height="@dimen/twoHundredFifty">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/shadowTxt"
+                style="@style/createLayoutHeadText"
+                android:text="@string/shadow" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/shadowSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/ten" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shadowTxt"
+                android:orientation="vertical"
+                android:padding="@dimen/ten">
+
+
+                <LinearLayout style="@style/customizeLayout">
+
+                    <TextView
+                        style="@style/customizeLayoutText"
+                        android:text="@string/color" />
+
+                    <com.divyanshu.colorseekbar.ColorSeekBar
+                        android:id="@+id/shadowColor"
+                        style="@style/createColorSeekBar" />
+                </LinearLayout>
+
+
+                <LinearLayout style="@style/customizeLayout">
+
+                    <TextView
+                        style="@style/customizeLayoutText"
+                        android:text="@string/left_right" />
+
+                    <SeekBar
+                        android:id="@+id/shadowLeftRight"
+                        style="@style/createSeekBarStyle"
+                        android:max="20" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/customizeLayout">
+
+                    <TextView
+                        style="@style/customizeLayoutText"
+                        android:text="@string/up_down" />
+
+                    <SeekBar
+                        android:id="@+id/shadowUpDown"
+                        style="@style/createSeekBarStyle"
+                        android:max="20" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/customizeLayout">
+
+                    <TextView
+                        style="@style/customizeLayoutText"
+                        android:text="@string/picture_blur" />
+
+                    <SeekBar
+                        android:id="@+id/shadowBlur"
+                        style="@style/createSeekBarStyle"
+                        android:max="30" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shadowClose"
+                style="@style/createCloseLayout">
+
+                <ImageView
+                    android:id="@+id/shadowCloseIcon"
+                    style="@style/createCloseIcon"
+                    android:contentDescription="@string/app_name" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <!--font Dialog-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fontLayout"
+        style="@style/createMainLayoutCardView"
+        android:layout_height="@dimen/twoHundredFifty">
+
+
+        <RelativeLayout style="@style/customizeLayout">
+
+            <TextView
+                android:id="@+id/fontTxt"
+                style="@style/createLayoutHeadText"
+                android:text="@string/font" />
+
+            <ListView
+                android:id="@+id/fontListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fontTxt" />
+
+            <LinearLayout
+                android:id="@+id/fontClose"
+                style="@style/createCloseLayout">
+
+                <ImageView
+                    android:id="@+id/fontCloseIcon"
+                    style="@style/createCloseIcon"
+                    android:contentDescription="@string/app_name" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <!--filter shadow-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/filterLayout"
+        style="@style/createMainLayoutCardView"
+        android:layout_height="270dp">
+
+
+        <RelativeLayout style="@style/customizeLayout">
+
+            <ImageView
+                android:id="@+id/filterDisable"
+                style="@style/createImageStyle"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/disable_icon" />
+
+            <TextView
+                android:id="@+id/filterTxt"
+                style="@style/createLayoutHeadText"
+                android:text="@string/filter" />
+
+            <ImageView
+                android:id="@+id/filterSubmit"
+                style="@style/createImageStyle"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/check_icon" />
+
+            <HorizontalScrollView
+                android:id="@+id/colorFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/filterTxt"
+                android:layout_margin="@dimen/five"
+                android:scrollbars="none">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="6620dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <GridView
+                            android:id="@+id/colorFilterGridView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp"
+                            android:columnWidth="70dp"
+                            android:horizontalSpacing="8dp"
+                            android:numColumns="86" />
+                    </LinearLayout>
+                </FrameLayout>
+            </HorizontalScrollView>
+
+            <SeekBar
+                android:id="@+id/filterSeekBar"
+                style="@style/createSeekBarStyle"
+                android:layout_width="match_parent"
+                android:layout_below="@id/colorFilter"
+                android:layout_centerInParent="false"
+                android:max="2000" />
+
+            <LinearLayout
+                android:id="@+id/filterClose"
+                style="@style/createCloseLayout">
+
+                <ImageView
+                    android:id="@+id/filterCloseIcon"
+                    style="@style/createCloseIcon"
+                    android:contentDescription="@string/app_name" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <!--effect dialog-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/effectLayout"
+        style="@style/createMainLayoutCardView"
+        android:layout_height="@dimen/twoHundredFifty">
+
+
+        <RelativeLayout style="@style/customizeLayout">
+
+            <TextView
+                android:id="@+id/effectTxt"
+                style="@style/createLayoutHeadText"
+                android:text="@string/effect" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/effectTxt">
+
+                <LinearLayout
+                    style="@style/customizeLayout"
+                    android:padding="@dimen/ten">
+
+                    <LinearLayout style="@style/customizeLayout">
+
+                        <TextView
+                            style="@style/customizeLayoutText"
+                            android:text="@string/image_blur" />
+
+                        <SeekBar
+                            android:id="@+id/imageBlur"
+                            style="@style/createSeekBarStyle"
+                            android:max="100" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/effectClose"
+                style="@style/createCloseLayout">
+
+                <ImageView
+                    android:id="@+id/effectCloseIcon"
+                    style="@style/createCloseIcon"
+                    android:contentDescription="@string/app_name" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
