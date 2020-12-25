@@ -49,7 +49,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int IMAGE_REQUEST = 1;
-    Spacing spacing;
+    SpacingClass spacingClass;
     EasyAccess easyAccess;
     Point p;
     Bitmap bitmap;
@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Uri imageUri;
     ImageFilter imageFilter;
     LinearLayout canvasBackground, backgroundList;
-    int letterSpacingNumber =0,lineSpacingNumber;
+    float letterSpacingNumber = .02f, lineSpacingNumber = 1f;
     //background
     ImageView createBack, createShare, createWallpaper, createDownload, backgroundBack, canvasBackgroundImage, galleryOpen, fakeImageView, flip1, flip2;
     //main canvas
-    TextView mainTextId, mainSubText, firstComma, secondComma, textBold, textItalic, textBoldItalic,letterSpaceMinus,letterSpaceCount,letterSpacePlus,lineSpaceMinus,lineSpaceCount,lineSpacePlus;
+    TextView mainTextId, mainSubText, firstComma, secondComma, textBold, textItalic, textBoldItalic, letterSpaceMinus, letterSpaceCount, letterSpacePlus, lineSpaceMinus, lineSpaceCount, lineSpacePlus;
     RelativeLayout saveScreen, reSizeCanvas;
     //control section
     LinearLayout mainControl;
@@ -77,8 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //shadow
     int blur = 4, leftRight = 5, upDown = 5, color = android.R.color.black;
     CardView textSizeLayout, colorLayout, propertyLayout, shadowLayout, fontLayout, filterLayout, effectLayout;
-    int position = 0;
-    int randomNum, randomPosition;
+    int position = 0, randomNum, randomPosition, letterSpace, lineSpace;
     float xDown = 0;
     float yDown = 0;
     String[] whatSay = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
@@ -96,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         imageFilter = new ImageFilter(); //filter obj
         easyAccess = new EasyAccess();
+        spacingClass = new SpacingClass();
 
         whiteStatus();//status white
         filterColorCode = getResources().getStringArray(R.array.filterColorCode); //get filter color
@@ -272,41 +272,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (clickId == R.id.flip2) {
             bitmap = ((BitmapDrawable) canvasBackgroundImage.getDrawable()).getBitmap();
             canvasBackgroundImage.setImageBitmap(imageFilter.flipImage(bitmap, 2));
-        }else if(clickId == R.id.letterSpaceMinus){
-            --letterSpacingNumber;
+        } else if (clickId == R.id.letterSpaceMinus) {
+            letterSpacingNumber = spacingClass.letterSpacing(letterSpacingNumber = (letterSpacingNumber - 0.02f));
+            letterSpace = spacingClass.letterSpacingCount(--letterSpace);
 
-        }else if(clickId == R.id.letterSpacePlus){
-            ++letterSpacingNumber;
-        }
-        else if(clickId == R.id.lineSpaceMinus){
-            --lineSpacingNumber;
             letterAndLineSpacing();
-        }else if(clickId == R.id.lineSpacePlus){
-            ++lineSpacingNumber;
+        } else if (clickId == R.id.letterSpacePlus) {
+            letterSpacingNumber = spacingClass.letterSpacing(letterSpacingNumber = (letterSpacingNumber + 0.02f));
+            letterSpace = spacingClass.letterSpacingCount(++letterSpace);
+            letterAndLineSpacing();
+        } else if (clickId == R.id.lineSpaceMinus) {
+            lineSpacingNumber = spacingClass.lineSpacing(lineSpacingNumber = (lineSpacingNumber - 0.2f));
+            lineSpace = spacingClass.lineSpacingCount(--lineSpace);
+            letterAndLineSpacing();
+        } else if (clickId == R.id.lineSpacePlus) {
+            lineSpacingNumber = spacingClass.lineSpacing(lineSpacingNumber = (lineSpacingNumber + 0.2f));
+            lineSpace = spacingClass.lineSpacingCount(++lineSpace);
             letterAndLineSpacing();
         }
     }
-    private void letterAndLineSpacing(){
-        if (letterSpacingNumber <1) {
-            letterSpacingNumber =10;
-            letterSpaceCount.setText(String.valueOf(letterSpacingNumber));
-        }else if(letterSpacingNumber > 10){
-            letterSpacingNumber=1;
-            letterSpaceCount.setText(String.valueOf(letterSpacingNumber));
-        }else {
-            letterSpaceCount.setText(String.valueOf(letterSpacingNumber));
-        }
 
-
-        if (lineSpacingNumber <1) {
-            lineSpacingNumber =10;
-            letterSpaceCount.setText("" + (lineSpacingNumber));
-        }else if(lineSpacingNumber > 10){
-            lineSpacingNumber=1;
-            lineSpaceCount.setText("" + (lineSpacingNumber));
-        }else {
-            lineSpaceCount.setText("" + (lineSpacingNumber));
-        }
+    private void letterAndLineSpacing() {
+        letterSpaceCount.setText(String.valueOf(letterSpace));
+        lineSpaceCount.setText(String.valueOf(lineSpace));
+        mainTextId.setLetterSpacing(letterSpacingNumber);
+        mainSubText.setLetterSpacing(letterSpacingNumber);
+        mainTextId.setLineSpacing(0, lineSpacingNumber);
 
     }
 
@@ -599,7 +590,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lineSpacePlus.setOnClickListener(this);
 
         propertyClose.setOnClickListener(this);
-
 
 
         customizeWidth.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -1011,16 +1001,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         removeView();
     }
 }
-class Spacing{
-    public int letterSpacing(int space){
-        if (space <1) {
-            space =10;
+
+class SpacingClass {
+    public float letterSpacing(float space) {
+        if (space < -0.10) {
+            space = -0.10f;
             return space;
-        }else if(space > 10){
-            space=1;
+        } else if (space > 1) {
+            space = 1;
             return space;
-        }else {
+        } else {
             return space;
+        }
+    }
+
+    public int letterSpacingCount(int count) {
+        if (count < -5) {
+            count = -5;
+            return count;
+        } else if (count > 50) {
+            count = 50;
+            return count;
+        } else {
+            return count;
+        }
+    }
+
+
+    public float lineSpacing(float space) {
+        if (space < 0.2) {
+            space = 0.2f;
+            return space;
+        } else if (space > 10) {
+            space = 10;
+            return space;
+        } else {
+            return space;
+        }
+    }
+
+    public int lineSpacingCount(int count) {
+        if (count < -5) {
+            count = -5;
+            return count;
+        } else if (count > 45) {
+            count = 45;
+            return count;
+        } else {
+            return count;
         }
     }
 }
