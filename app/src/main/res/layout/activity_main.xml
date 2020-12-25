@@ -359,12 +359,27 @@
                 android:text="@string/background"
                 android:textSize="20sp" />
 
-            <ImageView
+
+            <LinearLayout
                 android:id="@+id/galleryOpenId"
-                style="@style/createImageStyle"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/border_background"
+                android:gravity="center"
                 android:layout_alignParentEnd="true"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/gallery_icon" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Open Gellary"
+                    style="@style/createSmallText"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="0dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/gallery_icon" />
+            </LinearLayout>
 
         </RelativeLayout>
 

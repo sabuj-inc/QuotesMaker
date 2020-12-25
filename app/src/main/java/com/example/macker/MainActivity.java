@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] filterColorCode, filterColorName;
     Uri imageUri;
     ImageFilter imageFilter;
-    LinearLayout canvasBackground, backgroundList;
+    LinearLayout canvasBackground, backgroundList,galleryOpen;
     float letterSpacingNumber = .02f, lineSpacingNumber = 1f;
     //background
-    ImageView createBack, createShare, createWallpaper, createDownload, backgroundBack, canvasBackgroundImage, galleryOpen, fakeImageView, flip1, flip2;
+    ImageView createBack, createShare, createWallpaper, createDownload, backgroundBack, canvasBackgroundImage, fakeImageView, flip1, flip2;
     //main canvas
     TextView mainTextId, mainSubText, firstComma, secondComma, textBold, textItalic, textBoldItalic, letterSpaceMinus, letterSpaceCount, letterSpacePlus, lineSpaceMinus, lineSpaceCount, lineSpacePlus;
     RelativeLayout saveScreen, reSizeCanvas;
