@@ -71,8 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //gradient color
     ImageView addImage1, addImage2, addImage3;
     GridView GradientGridView, colorGridView;
-    RelativeLayout gradientCreateControl;
-    LinearLayout mainGradientCreate, createGradient, addColor1, addColor2, addColor3, gradientPreviewId, randomGradientId;
+    LinearLayout mainGradientCreate, mainColorText, addColor1, addColor2, addColor3, gradientPreviewId, randomGradientId;
     int addColorId = 1;
     CheckBox colorPositionChange, gradientAutoApply;
     SeekBar gradientOpacity;
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int orientation = 0;
     GradientDrawable gradientBackground, gradientPreview, constanceGradient, randomGradient;
     int colorList[] = {0, 0};
-
+    TextView colorBackground, colorText;
 
     //main canvas
     TextView mainTextId, mainSubText, firstComma, secondComma, textBold, textItalic, textBoldItalic, letterSpaceMinus, letterSpaceCount, letterSpacePlus, lineSpaceMinus, lineSpaceCount, lineSpacePlus;
@@ -262,6 +261,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             stopAnimation(textSizeLayout);
         } else if (clickId == R.id.colorId) { //color gradient
             setColor();
+        } else if (clickId == R.id.colorBackground) {
+            mainGradientCreate.setVisibility(View.VISIBLE);
+            colorBackground.setTypeface(Typeface.DEFAULT_BOLD);
+            mainColorText.setVisibility(View.INVISIBLE);
+            colorText.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+        } else if (clickId == R.id.colorText) {
+            mainColorText.setVisibility(View.VISIBLE);
+            colorText.setTypeface(Typeface.DEFAULT_BOLD);
+            mainGradientCreate.setVisibility(View.INVISIBLE);
+            colorBackground.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         } else if (clickId == R.id.addColor1) {
             addColorId = 1;
             setAddImage(addColorId);
@@ -275,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setGradientBackground(gradientBackground, colorList);
         } else if (clickId == R.id.randomGradientId) {
             setRandomGradient();
-        }else if (clickId == R.id.colorClose) {
+        } else if (clickId == R.id.colorClose) {
             stopAnimation(colorLayout);
         } else if (clickId == R.id.propertyId) {
             setProperty();
@@ -728,8 +737,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startAnimation(colorLayout);
 
         //gradient
+        colorBackground = findViewById(R.id.colorBackground);
+        colorText = findViewById(R.id.colorText);
         mainGradientCreate = findViewById(R.id.mainGradientCreate);
-        createGradient = findViewById(R.id.createGradient);
+        mainColorText = findViewById(R.id.mainColorText);
         addColor1 = findViewById(R.id.addColor1);
         addColor2 = findViewById(R.id.addColor2);
         addColor3 = findViewById(R.id.addColor3);
@@ -746,6 +757,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GradientGridView = findViewById(R.id.GradientGridView);
         randomGradientId = findViewById(R.id.randomGradientId);
 
+        colorBackground.setOnClickListener(this);
+        colorText.setOnClickListener(this);
         addColor1.setOnClickListener(this);
         addColor2.setOnClickListener(this);
         addColor3.setOnClickListener(this);
@@ -753,7 +766,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         randomGradientId.setOnClickListener(this);
 
         GradientGridView.setAdapter(gradientBackgroundClass);//constance gradient
-        colorGridView.setAdapter(singleColorClass); // own gradient
+        colorGridView.setAdapter(singleColorClass); //own gradient
 
         //gradient opacity set seekBar
         gradientOpacity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
