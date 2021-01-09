@@ -10,6 +10,9 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +26,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -32,6 +38,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,35 +63,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] filterColorCode, filterColorName;
     Uri imageUri;
     ImageFilter imageFilter;
-    LinearLayout canvasBackground, backgroundList,galleryOpen;
-    float letterSpacingNumber = .02f, lineSpacingNumber = 1f;
-    //background
-    ImageView createBack, createShare, createWallpaper, createDownload, backgroundBack, canvasBackgroundImage, fakeImageView, flip1, flip2;
+    LinearLayout canvasBackground, backgroundList, galleryOpen;
+
+
+    GradientBackgroundClass gradientBackgroundClass = new GradientBackgroundClass();
+    SingleColorClass singleColorClass = new SingleColorClass();
+    //gradient color
+    ImageView addImage1, addImage2, addImage3;
+    GridView GradientGridView, colorGridView;
+    RelativeLayout gradientCreateControl;
+    LinearLayout mainGradientCreate, createGradient, addColor1, addColor2, addColor3, gradientPreviewId, randomGradientId;
+    int addColorId = 1;
+    CheckBox colorPositionChange, gradientAutoApply;
+    SeekBar gradientOpacity;
+    Spinner gradientSpinner;
+    Button applyButton;
+    String[] country = {"Bottom-Top", "Left-Right", "Top-Right", "Top-Left"};
+    int orientation = 0;
+    GradientDrawable gradientBackground, gradientPreview, constanceGradient, randomGradient;
+    int colorList[] = {0, 0};
+
+
     //main canvas
     TextView mainTextId, mainSubText, firstComma, secondComma, textBold, textItalic, textBoldItalic, letterSpaceMinus, letterSpaceCount, letterSpacePlus, lineSpaceMinus, lineSpaceCount, lineSpacePlus;
     RelativeLayout saveScreen, reSizeCanvas;
     //control section
     LinearLayout mainControl;
-    CardView pictureListId, textEditId, textSizeId, colorId, propertyId, fontListId, shadowId, filterId, effectId;
     ColorSeekBar textColorSeekBar, backgroundColorSeekBar, shadowColor, customizeColor;
     SeekBar fontSizeSeekBar, backgroundColorOpacitySeekBar, shadowLeftRight, shadowUpDown, shadowBlur, filterSeekBar, customizeWidth, customizeHeight, customizeOpacity, imageBlurSeekBar;
     LinearLayout editLayout, textSizeClose, colorClose, propertyClose, shadowClose, fontClose, filterClose, effectClose;
-    ImageView textSizeCloseIcon, colorCloseIcon, propertyCloseIcon, shadowCloseIcon, fontCloseIcon, filterCloseIcon, effectCloseIcon;
+    ImageView textSizeCloseIcon, colorCloseIcon, propertyCloseIcon, shadowCloseIcon, fontCloseIcon, filterCloseIcon, effectCloseIcon,
+            createBack, createShare, createWallpaper, createDownload, backgroundBack, canvasBackgroundImage, fakeImageView, flip1, flip2;
     EditText messageEdit, whoSayEdit;
     SwitchMaterial commaSwitch, whoSaySwitch, shadowSwitch;
     // control View
-    GridView colorFilterGridView;
-    //shadow
-    int blur = 4, leftRight = 5, upDown = 5, color = android.R.color.black;
-    CardView textSizeLayout, colorLayout, propertyLayout, shadowLayout, fontLayout, filterLayout, effectLayout;
-    int position = 0, randomNum, randomPosition, letterSpace, lineSpace;
-    float xDown = 0;
-    float yDown = 0;
+    GridView colorFilterGridView, pictureListGridView;
+    CardView pictureListId, textEditId, textSizeId, colorId, propertyId, fontListId, shadowId, filterId, effectId, textSizeLayout, colorLayout, propertyLayout, shadowLayout, fontLayout, filterLayout, effectLayout;
+    int blur = 4, leftRight = 5, upDown = 5, color = android.R.color.black, position = 0, randomNum, randomPosition, letterSpace = 0, lineSpace = 0;
+    float xDown = 0, yDown = 0, letterSpacingNumber = .02f, lineSpacingNumber = 1f;
     String[] whatSay = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     String[] whoSay = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     //array
-    int[] backgroundImage = {R.drawable.bg1, R.drawable.bg2, R.drawable.bg3, R.drawable.bg4, R.drawable.bg5};
-    int[] fontArray = {R.font.font1, R.font.font2, R.font.font3, R.font.font4, R.font.font5, R.font.font6, R.font.font7};
+    int[] backgroundImage = {R.drawable.bg1, R.drawable.bg2, R.drawable.bg3, R.drawable.bg4, R.drawable.bg5, R.drawable.bg6,
+            R.drawable.bg7, R.drawable.bg8, R.drawable.bg9, R.drawable.bg10, R.drawable.bg11, R.drawable.bg12,
+            R.drawable.bg13, R.drawable.bg14, R.drawable.bg15, R.drawable.bg16, R.drawable.bg17, R.drawable.bg18,
+            R.drawable.bg19};
+    int[] fontArray = {R.font.font1, R.font.font2, R.font.font3, R.font.font4, R.font.font5, R.font.font6, R.font.font7,
+            R.font.font8, R.font.font9, R.font.font10, R.font.font11, R.font.font12, R.font.font13, R.font.font14,
+            R.font.font15, R.font.font16, R.font.font17, R.font.font18, R.font.font19, R.font.font20, R.font.font21,
+            R.font.font22, R.font.font23, R.font.font24, R.font.font25, R.font.font26, R.font.font27, R.font.font28,
+            R.font.font29, R.font.font30, R.font.font31, R.font.font32, R.font.font33, R.font.font34, R.font.font35,
+            R.font.font36, R.font.font37, R.font.font38, R.font.font39, R.font.font40, R.font.font41, R.font.font42
+    };
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -230,9 +260,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             openTextSize();
         } else if (clickId == R.id.textSizeClose) {
             stopAnimation(textSizeLayout);
-        } else if (clickId == R.id.colorId) {
+        } else if (clickId == R.id.colorId) { //color gradient
             setColor();
-        } else if (clickId == R.id.colorClose) {
+        } else if (clickId == R.id.addColor1) {
+            addColorId = 1;
+            setAddImage(addColorId);
+        } else if (clickId == R.id.addColor2) {
+            addColorId = 2;
+            setAddImage(addColorId);
+        } else if (clickId == R.id.addColor3) {
+            addColorId = 3;
+            setAddImage(addColorId);
+        } else if (clickId == R.id.applyButton) {
+            setGradientBackground(gradientBackground, colorList);
+        } else if (clickId == R.id.randomGradientId) {
+            setRandomGradient();
+        }else if (clickId == R.id.colorClose) {
             stopAnimation(colorLayout);
         } else if (clickId == R.id.propertyId) {
             setProperty();
@@ -275,7 +318,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (clickId == R.id.letterSpaceMinus) {
             letterSpacingNumber = spacingClass.letterSpacing(letterSpacingNumber = (letterSpacingNumber - 0.02f));
             letterSpace = spacingClass.letterSpacingCount(--letterSpace);
-
             letterAndLineSpacing();
         } else if (clickId == R.id.letterSpacePlus) {
             letterSpacingNumber = spacingClass.letterSpacing(letterSpacingNumber = (letterSpacingNumber + 0.02f));
@@ -291,6 +333,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             letterAndLineSpacing();
         }
     }
+
 
     private void letterAndLineSpacing() {
         letterSpaceCount.setText(String.valueOf(letterSpace));
@@ -359,8 +402,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setFilter() {
         startAnimation(filterLayout);
         bitmap = ((BitmapDrawable) canvasBackgroundImage.getDrawable()).getBitmap();
-
-
         ImageView filterDisable = findViewById(R.id.filterDisable);
         ImageView filterSubmit = findViewById(R.id.filterSubmit);
         colorFilterGridView = findViewById(R.id.colorFilterGridView);
@@ -426,6 +467,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Typeface typeface = ResourcesCompat.getFont(getApplicationContext(), fontArray[position]);
                 mainTextId.setTypeface(typeface);
+                mainSubText.setTypeface(typeface);
             }
         });
 
@@ -684,6 +726,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setColor() {
         startAnimation(colorLayout);
+
+        //gradient
+        mainGradientCreate = findViewById(R.id.mainGradientCreate);
+        createGradient = findViewById(R.id.createGradient);
+        addColor1 = findViewById(R.id.addColor1);
+        addColor2 = findViewById(R.id.addColor2);
+        addColor3 = findViewById(R.id.addColor3);
+        addImage1 = findViewById(R.id.addImage1);
+        addImage2 = findViewById(R.id.addImage2);
+        addImage3 = findViewById(R.id.addImage3);
+        gradientPreviewId = findViewById(R.id.gradientPreviewId);
+        colorPositionChange = findViewById(R.id.colorPositionChange);
+        colorGridView = findViewById(R.id.colorGridView);
+        gradientOpacity = findViewById(R.id.gradientOpacity);
+        gradientSpinner = findViewById(R.id.gradientSpinner);
+        gradientAutoApply = findViewById(R.id.gradientAutoApply);
+        applyButton = findViewById(R.id.applyButton);
+        GradientGridView = findViewById(R.id.GradientGridView);
+        randomGradientId = findViewById(R.id.randomGradientId);
+
+        addColor1.setOnClickListener(this);
+        addColor2.setOnClickListener(this);
+        addColor3.setOnClickListener(this);
+        applyButton.setOnClickListener(this);
+        randomGradientId.setOnClickListener(this);
+
+        GradientGridView.setAdapter(gradientBackgroundClass);//constance gradient
+        colorGridView.setAdapter(singleColorClass); // own gradient
+
+        //gradient opacity set seekBar
+        gradientOpacity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                canvasBackground.getBackground().setAlpha(progress);
+                gradientPreviewId.getBackground().setAlpha(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        //gradient orientation spinner adapter
+        ArrayAdapter spinner = new ArrayAdapter(this, R.layout.spinner_item, country);
+        spinner.setDropDownViewResource(R.layout.spinner_item);
+        gradientSpinner.setAdapter(spinner);
+
+
         textColorSeekBar = findViewById(R.id.textColorSeekBar);
         backgroundColorSeekBar = findViewById(R.id.backgroundColorSeekBar);
         backgroundColorOpacitySeekBar = findViewById(R.id.backgroundColorOpacitySeekBar);
@@ -723,6 +819,261 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+    //single color selected item icon set
+    private void setAddImage(int position) {
+        if (position == 1) {
+            addImage1.setVisibility(View.VISIBLE);
+            addImage2.setVisibility(View.INVISIBLE);
+            addImage3.setVisibility(View.INVISIBLE);
+        } else if (position == 2) {
+            addImage2.setVisibility(View.VISIBLE);
+            addImage1.setVisibility(View.INVISIBLE);
+            addImage3.setVisibility(View.INVISIBLE);
+        } else if (position == 3) {
+            addImage3.setVisibility(View.VISIBLE);
+            addImage1.setVisibility(View.INVISIBLE);
+            addImage2.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    //background random gradient set
+    private void setRandomGradient() {
+        randomGradient = new GradientDrawable();
+        colorList = new int[]{getRandomColor(), getRandomColor(), getRandomColor()};
+        randomGradient.setColors(colorList);
+        canvasBackground.setBackground(randomGradient);
+
+    }
+
+    //background gradient set
+    class GradientBackgroundClass extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return 99;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.gradient_count_flow, parent, false);
+            }
+            final LinearLayout gradientFlow = convertView.findViewById(R.id.gradientFlow);
+            final TextView gradientCount = convertView.findViewById(R.id.gradientCount);
+            constanceGradient = new GradientDrawable();
+            for (int i = 0; i < 99; i++) {
+                if (position == i) {
+                    if (position % 2 == 0) {
+                        colorList = new int[]{getRandomColor(), getRandomColor()};
+                        constanceGradient.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+                    } else {
+                        if (position % 3 == 0) {
+                            constanceGradient.setOrientation(GradientDrawable.Orientation.TL_BR);
+                        } else {
+                            constanceGradient.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+                            //SWEEP_GRADIENT,
+                        }
+                        colorList = new int[]{getRandomColor(), getRandomColor(), getRandomColor()};
+
+                    }
+
+                }
+            }
+            constanceGradient.setColors(colorList);
+
+            gradientFlow.setBackground(constanceGradient);
+
+            gradientCount.setText(String.valueOf(1 + position));
+            gradientFlow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    canvasBackground.setBackground(gradientFlow.getBackground());
+
+                }
+            });
+
+
+            return convertView;
+        }
+    }
+
+    //single color class
+    class SingleColorClass extends BaseAdapter {
+
+
+        @Override
+        public int getCount() {
+            return 99;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.gradient_count_flow, parent, false);
+            }
+
+            final LinearLayout gradientFlow = convertView.findViewById(R.id.gradientFlow);
+            TextView gradientCount = convertView.findViewById(R.id.gradientCount);
+
+            gradientFlow.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 190));
+
+            for (int i = 0; i < 99; i++) {
+                if (position == i) {
+                    int color = getRandomColor();
+                    gradientFlow.setBackgroundColor(color);
+                }
+            }
+
+
+            gradientFlow.setBackground(gradientFlow.getBackground());
+            gradientCount.setText(String.valueOf(position));
+            gradientBackground = new GradientDrawable();
+            gradientPreview = new GradientDrawable();
+
+
+            gradientFlow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (colorPositionChange.isChecked() && addColorId == 1) {
+                        addColor1.setBackground(gradientFlow.getBackground());
+                        addColorId = 2;
+                        setAddImage(1);
+                    } else if (addColorId == 1) {
+                        addColor1.setBackground(gradientFlow.getBackground());
+                        setAddImage(1);
+                    } else if (colorPositionChange.isChecked() && addColorId == 2) {
+                        addColor2.setBackground(gradientFlow.getBackground());
+                        addColorId = 3;
+                        setAddImage(2);
+                    } else if (addColorId == 2) {
+                        addColor2.setBackground(gradientFlow.getBackground());
+                        setAddImage(2);
+                    } else if (colorPositionChange.isChecked() && addColorId == 3) {
+                        addColor3.setBackground(gradientFlow.getBackground());
+                        addColorId = 1;
+                        setAddImage(3);
+                    } else if (addColorId == 3) {
+                        addColor3.setBackground(gradientFlow.getBackground());
+                        setAddImage(3);
+                    }
+
+                    // single color box
+                    int color1 = Color.TRANSPARENT, color2 = Color.TRANSPARENT, color3 = Color.TRANSPARENT;
+                    Drawable backgroundColor1, backgroundColor2, backgroundColor3;
+                    backgroundColor1 = addColor1.getBackground();
+                    backgroundColor2 = addColor2.getBackground();
+                    backgroundColor3 = addColor3.getBackground();
+
+                    if (backgroundColor1 instanceof ColorDrawable)
+                        color1 = ((ColorDrawable) backgroundColor1).getColor();
+
+                    if (backgroundColor2 instanceof ColorDrawable)
+                        color2 = ((ColorDrawable) backgroundColor2).getColor();
+
+                    if (backgroundColor3 instanceof ColorDrawable)
+                        color3 = ((ColorDrawable) backgroundColor3).getColor();
+
+                    colorList = new int[]{color1, color2, color3};
+                    if (gradientAutoApply.isChecked()) {
+                        setGradientBackground(gradientBackground, colorList);
+                    }
+                    setGradientPreview(gradientPreview, colorList);
+                }
+            });
+
+            //orientation select spinner
+            gradientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    orientation = position;
+                    if (gradientAutoApply.isChecked()) {
+                        setGradientBackground(gradientBackground, colorList);
+                    }
+                    setGradientPreview(gradientPreview, colorList);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            return convertView;
+        }
+    }
+
+    //gradient set into background
+    public void setGradientBackground(GradientDrawable solidGradient, int[] colorList) {
+        if (orientation == 0) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.BOTTOM_TOP);
+        } else if (orientation == 1) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+        } else if (orientation == 2) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.BR_TL);
+        } else if (orientation == 3) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.BL_TR);
+        } else if (orientation == 4) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.TR_BL);
+        }
+        solidGradient.setColors(colorList);
+        solidGradient.setAlpha(gradientOpacity.getProgress());
+
+
+        canvasBackground.setBackground(solidGradient);
+
+
+    }
+
+    //gradient set into preview
+    public void setGradientPreview(GradientDrawable solidGradient, int[] colorList) {
+        if (orientation == 0) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.BOTTOM_TOP);
+        } else if (orientation == 1) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+        } else if (orientation == 2) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.BR_TL);
+        } else if (orientation == 3) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.BL_TR);
+        } else if (orientation == 4) {
+            solidGradient.setOrientation(GradientDrawable.Orientation.TR_BL);
+        }
+        solidGradient.setColors(colorList);
+        solidGradient.setAlpha(gradientOpacity.getProgress());
+
+        if (colorList[0] != 0) {
+            gradientPreviewId.setBackground(solidGradient);
+        }
+    }
+
+    //random color set
+    private int getRandomColor() {
+        Random rnd = new Random();
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
 
     private void openTextSize() {
         startAnimation(textSizeLayout);
@@ -845,14 +1196,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void openPictureList() {
         startAnimation(backgroundList);
-        GridView PictureListGridView = findViewById(R.id.backgroundGridView);
+        pictureListGridView = findViewById(R.id.backgroundGridView);
         backgroundBack = findViewById(R.id.backgroundBack);
         galleryOpen = findViewById(R.id.galleryOpenId);
         backgroundBack.setOnClickListener(this);
         galleryOpen.setOnClickListener(this);
         SelectBackgroundClass selectBackgroundClass = new SelectBackgroundClass();
-        PictureListGridView.setAdapter(selectBackgroundClass);
-        PictureListGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        pictureListGridView.setAdapter(selectBackgroundClass);
+        pictureListGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 canvasBackgroundImage.setImageResource(backgroundImage[position]);
@@ -918,10 +1269,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.font_flow_layout, parent, false);
             }
+            Typeface typeface = ResourcesCompat.getFont(getApplicationContext(), fontArray[position]);
+
             TextView fontCount, fontList;
             fontCount = convertView.findViewById(R.id.fontCount);
             fontList = convertView.findViewById(R.id.fontList);
-            fontCount.setText(Integer.toString(position));
+            fontList.setText(mainTextId.getText().toString());
+            fontList.setTypeface(typeface);
+            fontCount.setTypeface(typeface);
+            fontCount.setText(Integer.toString(position + 1));
+
             return convertView;
         }
     }
@@ -997,15 +1354,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //super.onBackPressed();
         removeView();
     }
 }
 
 class SpacingClass {
     public float letterSpacing(float space) {
-        if (space < -0.10) {
-            space = -0.10f;
+        if (space < -0.15) {
+            space = -0.15f;
             return space;
         } else if (space > 1) {
             space = 1;
