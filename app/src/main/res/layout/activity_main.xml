@@ -72,8 +72,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/bg9" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg1" />
 
                 <ImageView
                     android:id="@+id/fakeImageView"
@@ -145,7 +145,8 @@
                     android:fontFamily="sans-serif-condensed"
                     android:padding="@dimen/ten"
                     android:text="@string/app_owner"
-                    android:textSize="@dimen/fifteen" />
+                    android:textSize="@dimen/fifteen"
+                    android:visibility="gone" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -362,17 +363,19 @@
 
             <LinearLayout
                 android:id="@+id/galleryOpenId"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_margin="5dp"
                 android:background="@drawable/border_background"
                 android:gravity="center"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:padding="5dp">
+
                 <TextView
+                    style="@style/createSmallText"
                     android:layout_width="wrap_content"
-                    android:text="Open Gellary"
-                    style="@style/createSmallText"/>
+                    android:text="Open Gellary" />
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -486,14 +489,346 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/colorLayout"
         style="@style/createMainLayoutCardView"
-        android:layout_height="@dimen/twoHundredFifty">
+        android:layout_height="600dp"
+        android:visibility="visible">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout style="@style/createControlLayout">
+            <LinearLayout
+                android:id="@+id/backgroundTextControl"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#ECA38D"
+                    android:gravity="center"
+                    android:text="Background Color" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Text Color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mainGradientCreate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/backgroundTextControl">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/gradientCreateControl"
+                            style="@style/createLayoutHeadText"
+                            android:text="Create Own Gradient"/>
+
+                        <!--create own gradient-->
+                        <LinearLayout
+                            android:id="@+id/createGradient"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#FFFFFF"
+                            android:orientation="vertical">
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/addColor1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_margin="5dp"
+                                    android:background="@drawable/dot_background"
+                                    android:backgroundTintMode="add"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:id="@+id/addImage1"
+                                        android:layout_width="25sp"
+                                        android:layout_height="25sp"
+                                        android:background="@drawable/click_background"
+                                        android:src="@drawable/gradient_plus_icon" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:id="@+id/addColor2"
+                                    android:layout_width="50dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_margin="5dp"
+                                    android:layout_toRightOf="@id/addColor1"
+                                    android:background="@drawable/dot_background"
+                                    android:backgroundTintMode="add"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:id="@+id/addImage2"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:background="@drawable/click_background"
+                                        android:src="@drawable/gradient_plus_icon" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/addColor3"
+                                    android:layout_width="50dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_margin="5dp"
+                                    android:layout_toRightOf="@id/addColor2"
+                                    android:background="@drawable/dot_background"
+                                    android:backgroundTintMode="add"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:id="@+id/addImage3"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:background="@drawable/click_background"
+                                        android:src="@drawable/gradient_plus_icon" />
+                                </LinearLayout>
+
+                                <LinearLayout
+
+                                    android:id="@+id/gradientPreviewId"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:background="@drawable/dot_background"
+                                    android:backgroundTintMode="add"
+                                    android:orientation="vertical" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/gradientPreviewId"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="15dp"
+                                    android:text="Preview" />
+
+                                <RelativeLayout
+                                    android:layout_width="180dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/addColor1">
+
+                                    <CheckBox
+                                        android:id="@+id/colorPositionChange"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:checked="true" />
+
+                                    <TextView
+                                        style="@style/createLayoutHeadText"
+                                        android:layout_marginLeft="30dp"
+                                        android:text="Auto Position Change" />
+                                </RelativeLayout>
+                            </RelativeLayout>
+
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:layout_margin="5dp"
+                                android:scrollbars="none">
+
+                                <FrameLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <LinearLayout
+                                        android:layout_width="4000dp"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <GridView
+                                            android:id="@+id/colorGridView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:horizontalSpacing="2dp"
+                                            android:numColumns="99" />
+                                    </LinearLayout>
+                                </FrameLayout>
+                            </HorizontalScrollView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <androidx.cardview.widget.CardView
+                                    style="@style/createSubLayoutCardView"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="2">
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            style="@style/createLayoutHeadText"
+                                            android:text="Gradient Opacity" />
+
+                                        <SeekBar
+                                            android:id="@+id/gradientOpacity"
+                                            style="@style/createSeekBarStyle"
+                                            android:layout_width="match_parent"
+                                            android:progress="200" />
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    style="@style/createSubLayoutCardView"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1">
+                                    <LinearLayout
+                                        android:gravity="center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@style/createLayoutHeadText"
+                                            android:text="Direction" />
+
+                                        <Spinner
+                                            android:id="@+id/gradientSpinner"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="40dp" />
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true">
+
+                                    <CheckBox
+                                        android:id="@+id/gradientAutoApply"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true" />
+
+                                    <TextView
+                                        android:layout_marginLeft="20dp"
+                                        style="@style/createLayoutHeadText"
+                                        android:text="Auto Apply" />
+                                </RelativeLayout>
+
+                                <Button
+                                    android:id="@+id/applyButton"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:text="Apply"
+                                    android:textAllCaps="false" />
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+
+                        <!--constance gradient-->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:background="#fff">
+
+
+                            <TextView
+                                android:id="@+id/select_gradient"
+                                style="@style/createLayoutHeadText"
+                                android:text="Select Gradient" />
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/select_gradient"
+                                android:layout_margin="5dp"
+                                android:scrollbars="none">
+
+                                <FrameLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+
+                                        android:layout_width="6000dp"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <GridView
+                                            android:id="@+id/GradientGridView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:horizontalSpacing="3dp"
+                                            android:numColumns="100" />
+                                    </LinearLayout>
+                                </FrameLayout>
+                            </HorizontalScrollView>
+
+                            <LinearLayout
+                                android:id="@+id/randomGradientId"
+                                android:layout_width="50dp"
+                                android:layout_height="80dp"
+                                android:layout_below="@id/select_gradient"
+                                android:layout_alignParentEnd="true"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="5dp"
+                                android:background="#fff"
+                                android:backgroundTintMode="add"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/gradient_plus_icon" />
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/createControlLayout"
+                android:layout_below="@id/backgroundTextControl"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/createTitleTextStyle"
@@ -523,6 +858,8 @@
                     android:layout_width="match_parent" />
 
             </LinearLayout>
+
+
             <!--close color layout-->
             <LinearLayout
                 android:id="@+id/colorClose"
@@ -565,8 +902,8 @@
                 android:layout_marginBottom="@dimen/forty">
 
                 <LinearLayout
-                    android:padding="@dimen/five"
-                    style="@style/createControlLayout">
+                    style="@style/createControlLayout"
+                    android:padding="@dimen/five">
 
                     <!--text style and flip-->
                     <LinearLayout
@@ -588,16 +925,16 @@
                                     android:text="@string/text_style" />
 
                                 <LinearLayout
-                                    android:layout_centerInParent="true"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@id/textStyle">
+                                    android:layout_below="@id/textStyle"
+                                    android:layout_centerInParent="true">
 
                                     <TextView
                                         android:id="@+id/textBold"
                                         style="@style/createTextStyle"
                                         android:text="@string/bold"
-                                        android:textStyle="bold"/>
+                                        android:textStyle="bold" />
 
                                     <TextView
                                         android:id="@+id/textItalic"
@@ -677,19 +1014,19 @@
                                     <TextView
                                         android:id="@+id/letterSpaceMinus"
                                         style="@style/textSpacingStyle"
-                                        android:text="-"/>
+                                        android:text="-" />
 
                                     <TextView
                                         android:id="@+id/letterSpaceCount"
                                         style="@style/textSpacingStyle"
-                                        android:text="0"
                                         android:layout_margin="@dimen/zero"
+                                        android:text="0"
                                         android:textSize="@dimen/fifteen" />
 
                                     <TextView
                                         android:id="@+id/letterSpacePlus"
                                         style="@style/textSpacingStyle"
-                                        android:text="+"/>
+                                        android:text="+" />
                                 </LinearLayout>
 
 
@@ -719,7 +1056,7 @@
                                     <TextView
                                         android:id="@+id/lineSpaceMinus"
                                         style="@style/textSpacingStyle"
-                                        android:text="-"/>
+                                        android:text="-" />
 
                                     <TextView
                                         android:id="@+id/lineSpaceCount"
@@ -731,7 +1068,7 @@
                                     <TextView
                                         android:id="@+id/lineSpacePlus"
                                         style="@style/textSpacingStyle"
-                                        android:text="+"/>
+                                        android:text="+" />
                                 </LinearLayout>
 
 
@@ -975,7 +1312,8 @@
                 android:id="@+id/fontListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/fontTxt" />
+                android:layout_below="@+id/fontTxt"
+                android:layout_marginBottom="@dimen/fifty" />
 
             <LinearLayout
                 android:id="@+id/fontClose"
