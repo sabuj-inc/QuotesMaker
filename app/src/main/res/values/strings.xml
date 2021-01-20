@@ -27,7 +27,7 @@
     <string name="bold">Bold</string>
     <string name="text_style">Text Style</string>
     <string name="background_color_opacity">Background Color Opacity</string>
-    <string name="background_color">Background Color</string>
+    <string name="solid_color">Solid Color</string>
     <string name="text_color">Text Color</string>
     <string name="font_size">Font Size</string>
     <string name="person_name">Othor</string>

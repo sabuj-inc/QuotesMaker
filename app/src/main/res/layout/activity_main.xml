@@ -21,17 +21,21 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
                 <ImageView
                     android:id="@+id/createBack"
                     style="@style/createImageStyle"
+                    android:layout_margin="0dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/back_icon" />
 
                 <ImageView
                     android:id="@+id/createShare"
                     style="@style/createImageStyle"
+                    android:layout_margin="0dp"
                     android:layout_toStartOf="@+id/createWallpaper"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/share_icon" />
@@ -39,6 +43,7 @@
                 <ImageView
                     android:id="@+id/createWallpaper"
                     style="@style/createImageStyle"
+                    android:layout_margin="0dp"
                     android:layout_toStartOf="@+id/createDownload"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/wallpaper_icon" />
@@ -47,6 +52,7 @@
                     android:id="@+id/createDownload"
                     style="@style/createImageStyle"
                     android:layout_alignParentEnd="true"
+                    android:layout_margin="0dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/download_icon" />
             </RelativeLayout>
@@ -95,7 +101,7 @@
                         android:id="@+id/reSizeCanvas"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#0F000000">
+                        android:background="#00000000">
 
                         <TextView
                             android:id="@+id/firstComma"
@@ -386,13 +392,79 @@
 
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/local"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_button">
+
+                <TextView
+                    style="@style/createLayoutHeadText"
+                    android:text="Gallery" />
+
+                <TextView
+                    android:id="@+id/galleryColorBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/holo_blue_dark" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_button">
+
+                <TextView
+                    style="@style/createLayoutHeadText"
+                    android:text="Local" />
+
+                <TextView
+                    android:id="@+id/localColorBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/holo_blue_dark" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient_button">
+
+                <TextView
+                    style="@style/createLayoutHeadText"
+                    android:text="Online" />
+
+                <TextView
+                    android:id="@+id/onlineColorBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/holo_blue_dark" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
         <GridView
             android:id="@+id/backgroundGridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:listSelector="@android:color/white"
             android:numColumns="2" />
+
     </LinearLayout>
+
 
     <!--edit dialog-->
     <LinearLayout
@@ -502,31 +574,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:background="@drawable/gradient_button"
+                <RelativeLayout
                     android:id="@+id/colorBackground"
                     android:layout_width="0dp"
+                    android:layout_height="45dp"
                     android:layout_weight="1"
-                    style="@style/createLayoutHeadText"
-                    android:text="Background Color" />
+                    android:background="@drawable/gradient_button">
 
-                <TextView
-                    android:layout_marginLeft="2dp"
-                    android:background="@drawable/gradient_button"
+                    <TextView
+                        style="@style/createLayoutHeadText"
+                        android:text="Background Color" />
+
+                    <TextView
+                        android:id="@+id/backgroundColorBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@android:color/holo_blue_dark" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/colorText"
                     android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_weight="1"
-                    style="@style/createLayoutHeadText"
-                    android:text="Text Color" />
+                    android:background="@drawable/gradient_button">
+
+                    <TextView
+                        style="@style/createLayoutHeadText"
+                        android:text="Text Color" />
+
+                    <TextView
+                        android:id="@+id/textColorBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@android:color/holo_blue_dark" />
+                </RelativeLayout>
+
+
             </LinearLayout>
 
             <!--gradient color-->
             <LinearLayout
-                android:layout_marginBottom="50dp"
                 android:id="@+id/mainGradientCreate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/backgroundTextControl">
+                android:layout_below="@id/backgroundTextControl"
+                android:layout_marginBottom="50dp"
+                android:visibility="gone">
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -538,159 +635,173 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/gradientCreateControl"
-                            style="@style/createLayoutHeadText"
-                            android:text="Create Own Gradient"/>
-
-                        <!--create own gradient-->
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:orientation="vertical">
+                            android:layout_height="60dp"
+                            android:gravity="center">
+
+                            <TextView
+                                style="@style/createTitleTextStyle"
+                                android:text="@string/solid_color" />
+
+                            <com.divyanshu.colorseekbar.ColorSeekBar
+                                android:id="@+id/backgroundColorSeekBar"
+                                style="@style/createColorSeekBar" />
+                        </LinearLayout>
 
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            style="@style/createSubLayoutCardView"
+                            android:layout_width="match_parent">
 
-                                <LinearLayout
-                                    android:id="@+id/addColor1"
-                                    android:layout_width="50dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_margin="5dp"
-                                    android:background="@drawable/dot_background"
-                                    android:backgroundTintMode="add"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:id="@+id/addImage1"
-                                        android:layout_width="25sp"
-                                        android:layout_height="25sp"
-                                        android:background="@drawable/click_background"
-                                        android:src="@drawable/gradient_plus_icon" />
-                                </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:id="@+id/addColor2"
-                                    android:layout_width="50dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_margin="5dp"
-                                    android:layout_toRightOf="@id/addColor1"
-                                    android:background="@drawable/dot_background"
-                                    android:backgroundTintMode="add"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:id="@+id/addImage2"
-                                        android:layout_width="25dp"
-                                        android:layout_height="25dp"
-                                        android:background="@drawable/click_background"
-                                        android:src="@drawable/gradient_plus_icon" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/addColor3"
-                                    android:layout_width="50dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_margin="5dp"
-                                    android:layout_toRightOf="@id/addColor2"
-                                    android:background="@drawable/dot_background"
-                                    android:backgroundTintMode="add"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:id="@+id/addImage3"
-                                        android:layout_width="25dp"
-                                        android:layout_height="25dp"
-                                        android:background="@drawable/click_background"
-                                        android:src="@drawable/gradient_plus_icon" />
-                                </LinearLayout>
-
-                                <LinearLayout
-
-                                    android:id="@+id/gradientPreviewId"
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="5dp"
-                                    android:background="@drawable/dot_background"
-                                    android:backgroundTintMode="add"
-                                    android:orientation="vertical" />
-
-                                <TextView
-                                    android:layout_marginRight="15dp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/gradientPreviewId"
-                                    android:layout_alignParentRight="true"
-                                    style="@style/createLayoutHeadText"
-                                    android:text="Preview" />
-
-                                <RelativeLayout
-                                    android:layout_width="180dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/addColor1">
-
-                                    <CheckBox
-                                        android:id="@+id/colorPositionChange"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:checked="true" />
-
-                                    <TextView
-                                        style="@style/createLayoutHeadText"
-                                        android:layout_marginLeft="30dp"
-                                        android:text="Auto Position Change" />
-                                </RelativeLayout>
-                            </RelativeLayout>
-
-
-                            <HorizontalScrollView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:scrollbars="none">
+                                android:background="#FFFFFF"
+                                android:orientation="vertical">
 
-                                <FrameLayout
+                                <TextView
+                                    android:id="@+id/gradientCreateControl"
+                                    style="@style/createLayoutHeadText"
+                                    android:text="Create Own Gradient" />
+
+                                <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
 
                                     <LinearLayout
-                                        android:layout_width="4000dp"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
+                                        android:id="@+id/addColor1"
+                                        android:layout_width="50dp"
+                                        android:layout_height="70dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/dot_background"
+                                        android:backgroundTintMode="add"
+                                        android:gravity="center">
 
-                                        <GridView
-                                            android:id="@+id/colorGridView"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:horizontalSpacing="2dp"
-                                            android:numColumns="99" />
+                                        <ImageView
+                                            android:id="@+id/addImage1"
+                                            android:layout_width="25sp"
+                                            android:layout_height="25sp"
+                                            android:background="@drawable/click_background"
+                                            android:src="@drawable/gradient_plus_icon" />
                                     </LinearLayout>
-                                </FrameLayout>
-                            </HorizontalScrollView>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <androidx.cardview.widget.CardView
-                                    style="@style/createSubLayoutCardView"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="2">
 
                                     <LinearLayout
-                                        android:orientation="vertical"
+                                        android:id="@+id/addColor2"
+                                        android:layout_width="50dp"
+                                        android:layout_height="70dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_margin="5dp"
+                                        android:layout_toRightOf="@id/addColor1"
+                                        android:background="@drawable/dot_background"
+                                        android:backgroundTintMode="add"
+                                        android:gravity="center">
+
+                                        <ImageView
+                                            android:id="@+id/addImage2"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:background="@drawable/click_background"
+                                            android:src="@drawable/gradient_plus_icon" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/addColor3"
+                                        android:layout_width="50dp"
+                                        android:layout_height="70dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_margin="5dp"
+                                        android:layout_toRightOf="@id/addColor2"
+                                        android:background="@drawable/dot_background"
+                                        android:backgroundTintMode="add"
+                                        android:gravity="center">
+
+                                        <ImageView
+                                            android:id="@+id/addImage3"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp"
+                                            android:background="@drawable/click_background"
+                                            android:src="@drawable/gradient_plus_icon" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+
+                                        android:id="@+id/gradientPreviewId"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/dot_background"
+                                        android:backgroundTintMode="add"
+                                        android:orientation="vertical" />
+
+                                    <TextView
+                                        style="@style/createLayoutHeadText"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/gradientPreviewId"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginRight="15dp"
+                                        android:text="Preview" />
+
+                                    <RelativeLayout
+                                        android:layout_width="180dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/addColor1">
+
+                                        <CheckBox
+                                            android:id="@+id/colorPositionChange"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:checked="true" />
+
+                                        <TextView
+                                            style="@style/createLayoutHeadText"
+                                            android:layout_marginLeft="30dp"
+                                            android:text="Auto Position Change" />
+                                    </RelativeLayout>
+                                </RelativeLayout>
+
+
+                                <HorizontalScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:scrollbars="none">
+
+                                    <FrameLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:layout_width="4000dp"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <GridView
+                                                android:id="@+id/colorGridView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:horizontalSpacing="2dp"
+                                                android:numColumns="99" />
+                                        </LinearLayout>
+                                    </FrameLayout>
+                                </HorizontalScrollView>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:orientation="vertical">
 
                                         <TextView
                                             style="@style/createLayoutHeadText"
@@ -703,16 +814,13 @@
                                             android:progress="200" />
 
                                     </LinearLayout>
-                                </androidx.cardview.widget.CardView>
 
-                                <androidx.cardview.widget.CardView
-                                    style="@style/createSubLayoutCardView"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1">
+
                                     <LinearLayout
-                                        android:gravity="center"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
                                         android:orientation="vertical">
 
                                         <TextView
@@ -725,46 +833,47 @@
                                             android:layout_height="40dp" />
 
                                     </LinearLayout>
-                                </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="120dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true">
+
+                                        <CheckBox
+                                            android:id="@+id/gradientAutoApply"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true" />
+
+                                        <TextView
+                                            style="@style/createLayoutHeadText"
+                                            android:layout_marginLeft="20dp"
+                                            android:text="Auto Apply" />
+                                    </RelativeLayout>
+
+                                    <Button
+                                        android:id="@+id/applyButton"
+                                        android:layout_width="150dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/round_shap"
+                                        android:text="Apply"
+                                        android:textAllCaps="false" />
+                                </RelativeLayout>
 
 
                             </LinearLayout>
-
-                            <RelativeLayout
-                                android:layout_margin="5dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <RelativeLayout
-                                    android:layout_width="120dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true">
-
-                                    <CheckBox
-                                        android:id="@+id/gradientAutoApply"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true" />
-
-                                    <TextView
-                                        android:layout_marginLeft="20dp"
-                                        style="@style/createLayoutHeadText"
-                                        android:text="Auto Apply" />
-                                </RelativeLayout>
-
-                                <Button
-                                    android:layout_margin="5dp"
-                                    android:background="@drawable/round_shap"
-                                    android:id="@+id/applyButton"
-                                    android:layout_width="150dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:text="Apply"
-                                    android:textAllCaps="false" />
-                            </RelativeLayout>
-
-
-                        </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <!--create own gradient-->
 
 
                         <!--constance gradient-->
@@ -836,7 +945,7 @@
                 android:id="@+id/mainColorText"
                 style="@style/createControlLayout"
                 android:layout_below="@id/backgroundTextControl"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     style="@style/createTitleTextStyle"
@@ -847,23 +956,65 @@
                     style="@style/createColorSeekBar"
                     android:layout_width="match_parent" />
 
-                <TextView
-                    style="@style/createTitleTextStyle"
-                    android:text="@string/background_color" />
 
-                <com.divyanshu.colorseekbar.ColorSeekBar
-                    android:id="@+id/backgroundColorSeekBar"
-                    style="@style/createColorSeekBar"
-                    android:layout_width="match_parent" />
+                    <androidx.cardview.widget.CardView
+                        style="@style/createSubLayoutCardView">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:id="@+id/multiColorText"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/fifty">
 
-                <TextView
-                    style="@style/createTitleTextStyle"
-                    android:text="@string/background_color_opacity" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:paddingStart="@dimen/five"
+                                    android:text="Multi Color" />
 
-                <SeekBar
-                    android:id="@+id/backgroundColorOpacitySeekBar"
-                    style="@style/createSeekBarStyle"
-                    android:layout_width="match_parent" />
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_margin="5dp"
+                                    android:background="@drawable/click_background"
+                                    android:padding="5dp"
+                                    android:src="@drawable/arrow_down_icon" />
+                            </RelativeLayout>
+                            <View
+                                android:background="#DCDBDB"
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent"/>
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/fifty">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:paddingStart="@dimen/five"
+                                    android:text="Text Shadow" />
+
+
+                                <com.google.android.material.switchmaterial.SwitchMaterial
+                                    android:id="@+id/textShadowSwitch"
+                                    android:checked="false"
+                                    style="@style/customizeSwitch" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
 
             </LinearLayout>
 
@@ -884,7 +1035,8 @@
     <!--property dialog-->
     <androidx.cardview.widget.CardView
         android:id="@+id/propertyLayout"
-        style="@style/createMainLayoutCardView">
+        style="@style/createMainLayoutCardView"
+        android:visibility="gone">
 
 
         <RelativeLayout

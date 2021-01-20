@@ -30,6 +30,7 @@
         <item name="android:padding">@dimen/ten</item>
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
+        <item name="android:layout_margin">5dp</item>
         <item name="android:background">@drawable/click_background</item>
     </style>
     <style name="createControlImageStyle">
@@ -50,7 +51,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:padding">@dimen/ten</item>
+        <item name="android:padding">@dimen/five</item>
     </style>
 
     <style name="canvasTextViewStyle">
