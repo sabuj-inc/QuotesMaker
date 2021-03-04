@@ -21,7 +21,7 @@
             android:id="@+id/fontList"
             android:lines="1"
             android:gravity="center"
-            android:textSize="19sp"
+            android:textSize="17sp"
             android:text="Hope You Like This App."
             android:layout_weight="5"
             android:layout_width="0dp"

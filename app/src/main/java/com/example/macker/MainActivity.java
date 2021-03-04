@@ -17,8 +17,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -66,42 +68,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] filterColorCode, filterColorName;
     Uri imageUri;
     ImageFilter imageFilter;
-    LinearLayout canvasBackground, backgroundList, galleryOpen;
+    LinearLayout canvasBackground, backgroundList;
     int bold = 0, italic = 0, boldItalic = 0;
 
     GradientBackgroundClass gradientBackgroundClass = new GradientBackgroundClass();
     SingleColorClass singleColorClass = new SingleColorClass();
     //gradient color
     ImageView addImage1, addImage2, addImage3;
-    RelativeLayout multiColorText;
+    RelativeLayout multiColorText, galleryOpen;
     GridView GradientGridView, colorGridView;
     LinearLayout mainGradientCreate, mainColorText, addColor1, addColor2, addColor3, gradientPreviewId, randomGradientId;
     int addColorId = 1;
     CheckBox colorPositionChange, gradientAutoApply;
-    SeekBar gradientOpacity;
+    SeekBar solidOpacitySeekBar, gradientOpacity;
     Spinner gradientSpinner;
-    Button applyButton;
+    Button applyButton,watermarkSave;
     String[] orientationList = {"Bottom-Top", "Left-Right", "Top-Right", "Top-Left"};
     int orientation = 0;
     GradientDrawable gradientBackground, gradientPreview, constanceGradient, randomGradient;
     int[] colorList = {0, 0, 0}, randomColorList = {0, 0, 0}, gradientColorList = {0, 0, 0};
     RelativeLayout colorBackground, colorText;
-
+    ImageView waterImage1,waterImage2,waterImage3,resultImage1,resultImage2,resultImage3;
+    TextWatcher textWatcher = null;
     //main canvas
     TextView mainTextId, mainSubText, firstComma, secondComma, textBold, textItalic, textBoldItalic, letterSpaceMinus,
-            letterSpaceCount, letterSpacePlus, lineSpaceMinus, lineSpaceCount, lineSpacePlus, backgroundColorBar, textColorBar;
-    RelativeLayout saveScreen, reSizeCanvas;
+            letterSpaceCount, letterSpacePlus, lineSpaceMinus, lineSpaceCount, lineSpacePlus, backgroundColorBar, textColorBar,
+            watermarkText;
+    RelativeLayout saveScreen, reSizeCanvas,contentLayout;
     //control section
-    LinearLayout mainControl;
-    ColorSeekBar textColorSeekBar, backgroundColorSeekBar, shadowColor, customizeColor;
-    SeekBar fontSizeSeekBar, shadowLeftRight, shadowUpDown, shadowBlur, filterSeekBar, customizeWidth, customizeHeight, customizeOpacity, imageBlurSeekBar;
-    LinearLayout editLayout, textSizeClose, colorClose, propertyClose, shadowClose, fontClose, filterClose, effectClose;
+    LinearLayout mainControl,watermarkGroup;
+    ColorSeekBar textColorSeekBar, backgroundColorSeekBar, shadowColor, customizeColor,watermarkColor;
+    SeekBar fontSizeSeekBar, shadowLeftRight, shadowUpDown, shadowBlur, filterSeekBar, customizeWidth, customizeHeight, customizeOpacity, imageBlurSeekBar,watermarkOpacity;
+    LinearLayout editLayout, textSizeClose, colorClose, propertyClose, shadowClose, fontClose, filterClose, effectClose,watermarkClose;
     ImageView textSizeCloseIcon, colorCloseIcon, propertyCloseIcon, shadowCloseIcon, fontCloseIcon, filterCloseIcon, effectCloseIcon,
-            createBack, createShare, createWallpaper, createDownload, backgroundBack, canvasBackgroundImage, fakeImageView, flip1, flip2;
-    EditText messageEdit, whoSayEdit;
-    SwitchMaterial commaSwitch, whoSaySwitch, shadowSwitch, textShadowSwitch;
+            createBack, createShare, createWallpaper, createDownload, backgroundBack, canvasBackgroundImage, fakeImageView, flip1, flip2,
+            watermarkCloseIcon;
+    EditText messageEdit, whoSayEdit,watermarkEdit;
+    SwitchMaterial commaSwitch, whoSaySwitch, shadowSwitch, textShadowSwitch,watermarkSwitch;
     // control View
-    GridView colorFilterGridView, pictureListGridView;
+    GridView colorFilterGridView, pictureListGridView,watermarkFontGridView;
     CardView pictureListId, textEditId, textSizeId, colorId, propertyId, fontListId, shadowId, filterId, effectId, textSizeLayout, colorLayout, propertyLayout, shadowLayout, fontLayout, filterLayout, effectLayout;
     int blur = 4, leftRight = 5, upDown = 5, color = Color.BLACK, position = 0, randomNum, randomPosition, letterSpace = 0, lineSpace = 0;
     float xDown = 0, yDown = 0, letterSpacingNumber = .02f, lineSpacingNumber = 1f;
@@ -132,12 +137,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spacingClass = new SpacingClass();
 
         whiteStatus();//status white
+
         filterColorCode = getResources().getStringArray(R.array.filterColorCode); //get filter color
         filterColorName = getResources().getStringArray(R.array.filterColorName); //get filter name
         randomNum = new Random().nextInt(whoSay.length - 1);//random number
         backgroundList = findViewById(R.id.backgroundList);//background
         editLayout = findViewById(R.id.editLayout);//edit
+
         //main canvas
+        shadowSwitch = findViewById(R.id.shadowSwitch);//for perfect work shadow switch
         createBack = findViewById(R.id.createBack);
         createShare = findViewById(R.id.createShare);
         createWallpaper = findViewById(R.id.createWallpaper);
@@ -148,10 +156,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fakeImageView = findViewById(R.id.fakeImageView);
         canvasBackground = findViewById(R.id.canvasBackground);
         reSizeCanvas = findViewById(R.id.reSizeCanvas);
+        contentLayout = findViewById(R.id.contentLayout);
         mainTextId = findViewById(R.id.mainTextId);
         mainSubText = findViewById(R.id.mainSubText);
         firstComma = findViewById(R.id.firstComma);
         secondComma = findViewById(R.id.secondComma);
+
+        //watermark find
+        resultImage1 = findViewById(R.id.resultImage1);
+        resultImage2 = findViewById(R.id.resultImage2);
+        resultImage3 = findViewById(R.id.resultImage3);
+        watermarkText = findViewById(R.id.watermarkText);
 
         //control find
         mainControl = findViewById(R.id.mainControl);
@@ -189,36 +204,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         filterId.setOnClickListener(this);
         effectId.setOnClickListener(this);
 
+        //random load background image
+
+        easyAccess.singleView(this, "");
+        easyAccess.getCurrentBackground(easyAccess.setCurrentBackground() + 1);
+
+        if (easyAccess.setCurrentBackground() < backgroundImage.length) {
+            canvasBackgroundImage.setImageResource(backgroundImage[easyAccess.setCurrentBackground()]);
+            canvasBackground.getBackground().setAlpha(100);
+        } else {
+            easyAccess.getCurrentBackground(0);
+        }
+        //random load font
+        easyAccess.getCurrentFont(easyAccess.setCurrentFont() + 1);
+        if (easyAccess.setCurrentFont() < fontArray.length) {
+            Typeface typeface = ResourcesCompat.getFont(getApplicationContext(), fontArray[easyAccess.setCurrentFont()]);
+            mainTextId.setTypeface(typeface);
+            mainSubText.setTypeface(typeface);
+        } else {
+            easyAccess.getCurrentFont(0);
+        }
+
         //control view listener
         //mainTextId.getPaint().setStrokeWidth(2);
         //mainTextId.getPaint().setStyle(Paint.Style.STROKE);
-        reSizeCanvas.setOnTouchListener(new View.OnTouchListener() {
+        contentLayout.setOnTouchListener(new View.OnTouchListener() {
             GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
                 @Override
                 public boolean onDoubleTap(MotionEvent e) {
-                    opnEditText();
+
+                    if (backgroundList.getVisibility() != View.VISIBLE && editLayout.getVisibility() != View.VISIBLE && textSizeLayout.getVisibility() != View.VISIBLE && colorLayout.getVisibility() != View.VISIBLE && fontLayout.getVisibility() != View.VISIBLE &&
+                            effectLayout.getVisibility() != View.VISIBLE && filterLayout.getVisibility() != View.VISIBLE && propertyLayout.getVisibility() != View.VISIBLE && shadowLayout.getVisibility() != View.VISIBLE) {
+                        opnEditText();
+                    }
+
                     return super.onDoubleTap(e);
                 }
             });
 
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if (backgroundList.getVisibility() != View.VISIBLE && editLayout.getVisibility() != View.VISIBLE && textSizeLayout.getVisibility() != View.VISIBLE && colorLayout.getVisibility() != View.VISIBLE && fontLayout.getVisibility() != View.VISIBLE &&
+                        effectLayout.getVisibility() != View.VISIBLE && filterLayout.getVisibility() != View.VISIBLE && propertyLayout.getVisibility() != View.VISIBLE && shadowLayout.getVisibility() != View.VISIBLE) {
+                    switch (event.getActionMasked()) {
+                        case MotionEvent.ACTION_DOWN:
+                            xDown = event.getX();
+                            yDown = event.getY();
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            float moveX, moveY;
+                            moveX = event.getX();
+                            moveY = event.getY();
 
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN:
-                        xDown = event.getX();
-                        yDown = event.getY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        float moveX, moveY;
-                        moveX = event.getX();
-                        moveY = event.getY();
-
-                        float distanceX = moveX - xDown;
-                        float distanceY = moveY - yDown;
-                        reSizeCanvas.setX(reSizeCanvas.getX() + distanceX);
-                        reSizeCanvas.setY(reSizeCanvas.getY() + distanceY);
-                        break;
+                            float distanceX = moveX - xDown;
+                            float distanceY = moveY - yDown;
+                            reSizeCanvas.setX(reSizeCanvas.getX() + distanceX);
+                            reSizeCanvas.setY(reSizeCanvas.getY() + distanceY);
+                            break;
+                    }
                 }
 
                 gestureDetector.onTouchEvent(event);
@@ -226,7 +269,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        reSizeCanvas.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (backgroundList.getVisibility() != View.VISIBLE && editLayout.getVisibility() != View.VISIBLE && textSizeLayout.getVisibility() != View.VISIBLE && colorLayout.getVisibility() != View.VISIBLE && fontLayout.getVisibility() != View.VISIBLE &&
+                        effectLayout.getVisibility() != View.VISIBLE && filterLayout.getVisibility() != View.VISIBLE && propertyLayout.getVisibility() != View.VISIBLE && shadowLayout.getVisibility() != View.VISIBLE) {
+                    switch (event.getActionMasked()) {
+                        case MotionEvent.ACTION_DOWN:
+                            xDown = event.getX();
+                            yDown = event.getY();
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            float moveX, moveY;
+                            moveX = event.getX();
+                            moveY = event.getY();
 
+                            float distanceX = moveX - xDown;
+                            float distanceY = moveY - yDown;
+                            reSizeCanvas.setX(reSizeCanvas.getX() + distanceX);
+                            reSizeCanvas.setY(reSizeCanvas.getY() + distanceY);
+                            break;
+                    }
+                }
+
+                return true;
+            }
+        });
+
+
+
+
+        setWatermark();
     }
 
     @Override
@@ -239,9 +312,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (clickId == R.id.createWallpaper) {
             Toast.makeText(this, "createWallpaper", Toast.LENGTH_SHORT).show();
         } else if (clickId == R.id.createDownload) {
-            easyAccess.singleView(MainActivity.this, "12");
+            easyAccess.singleView(MainActivity.this, "");
             easyAccess.getImageResource(saveScreen);
-            easyAccess.imageSave(true);
+            easyAccess.imageSave(false);
         } else if (clickId == R.id.pictureListId) {
             openPictureList();
         } else if (clickId == R.id.backgroundBack) {
@@ -322,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (clickId == R.id.filterSubmit) {
             bitmap = ((BitmapDrawable) canvasBackgroundImage.getDrawable()).getBitmap();
             canvasBackgroundImage.setImageBitmap(bitmap);
-        } else if (clickId == R.id.textBold) {
+        }else if (clickId == R.id.textBold) {
             setTextStyle(Typeface.BOLD);
         } else if (clickId == R.id.textItalic) {
             setTextStyle(Typeface.ITALIC);
@@ -351,8 +424,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             lineSpace = spacingClass.lineSpacingCount(++lineSpace);
             letterAndLineSpacing();
         }
-    }
 
+        if(clickId == R.id.watermarkSave){
+            Toast.makeText(this, "click", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void setWatermark(){
+
+        //find watermark
+        watermarkGroup = findViewById(R.id.watermarkGroup);
+        watermarkSave = findViewById(R.id.watermarkSave);
+        watermarkSwitch = findViewById(R.id.watermarkSwitch);
+        waterImage1 = findViewById(R.id.waterImage1);
+        waterImage2 = findViewById(R.id.waterImage2);
+        waterImage3 = findViewById(R.id.waterImage3);
+        watermarkEdit = findViewById(R.id.watermarkEdit);
+        watermarkFontGridView = findViewById(R.id.watermarkFontGridView);
+        watermarkColor = findViewById(R.id.watermarkColor);
+        watermarkOpacity = findViewById(R.id.watermarkOpacity);
+        watermarkClose = findViewById(R.id.watermarkClose);
+        watermarkCloseIcon = findViewById(R.id.watermarkCloseIcon);
+
+        //Listener
+        watermarkSave.setOnClickListener(this);
+        waterImage1.setOnClickListener(this);
+        waterImage2.setOnClickListener(this);
+        waterImage3.setOnClickListener(this);
+        watermarkClose.setOnClickListener(this);
+
+
+        //visible or invisible
+        watermarkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    watermarkGroup.setVisibility(View.VISIBLE);
+                }else {
+                    watermarkGroup.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        // add run time text
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                watermarkText.setText(watermarkEdit.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+        };
+        watermarkEdit.addTextChangedListener(textWatcher);
+
+    }
 
     private void letterAndLineSpacing() {
         letterSpaceCount.setText(String.valueOf(letterSpace));
@@ -363,16 +496,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     private void setTextStyle(int id) {
-
         mainTextId.setTypeface(null, id);
         mainSubText.setTypeface(null, id);
         firstComma.setTypeface(null, id);
         secondComma.setTypeface(null, id);
         int draw = R.drawable.text_style_background, color = Color.TRANSPARENT;
         if (id == 1) {
-
             textItalic.setBackgroundColor(color);
             textBoldItalic.setBackgroundColor(color);
             italic = 0;
@@ -515,7 +645,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setShadow() {
         startAnimation(shadowLayout);
-        shadowSwitch = findViewById(R.id.shadowSwitch);
+        //shadowSwitch = findViewById(R.id.shadowSwitch);
         shadowColor = findViewById(R.id.shadowColor);
         shadowLeftRight = findViewById(R.id.shadowLeftRight);
         shadowUpDown = findViewById(R.id.shadowUpDown);
@@ -777,6 +907,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         colorBackground = findViewById(R.id.colorBackground);
         colorText = findViewById(R.id.colorText);
         backgroundColorBar = findViewById(R.id.backgroundColorBar);
+        solidOpacitySeekBar = findViewById(R.id.solidOpacitySeekBar);
         textColorBar = findViewById(R.id.textColorBar);
         mainGradientCreate = findViewById(R.id.mainGradientCreate);
         mainColorText = findViewById(R.id.mainColorText);
@@ -808,6 +939,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GradientGridView.setAdapter(gradientBackgroundClass);//constance gradient
         colorGridView.setAdapter(singleColorClass); //own gradient
 
+        backgroundColorSeekBar.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
+            @Override
+            public void onColorChangeListener(int color) {
+                canvasBackground.setBackgroundColor(color);
+                canvasBackground.getBackground().setAlpha((solidOpacitySeekBar.getProgress()));
+            }
+        });
+
+        solidOpacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                canvasBackground.getBackground().setAlpha(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         //gradient opacity set seekBar
         gradientOpacity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -839,7 +994,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         colorClose = findViewById(R.id.colorClose);
         colorCloseIcon = findViewById(R.id.colorCloseIcon);
         multiColorText.setOnClickListener(this);
-        //textShadowSwitch.setOnClickListener(this);
+        textShadowSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    setShadow(blur, leftRight, upDown, color);
+                } else {
+                    setShadow(0, leftRight, upDown, color);
+                }
+            }
+        });
+
         colorClose.setOnClickListener(this);
         textColorSeekBar.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
             @Override
@@ -850,12 +1015,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mainSubText.setTextColor(color);
                 firstComma.setTextColor(color);
                 secondComma.setTextColor(color);
-            }
-        });
-        backgroundColorSeekBar.setOnColorChangeListener(new ColorSeekBar.OnColorChangeListener() {
-            @Override
-            public void onColorChangeListener(int color) {
-                canvasBackground.setBackgroundColor(color);
             }
         });
 
@@ -901,9 +1060,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0, len = mainColorfulString.length(); i < len; i++) {
             mainSpan.setSpan(new ForegroundColorSpan(getRandomColor()), i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
         for (int i = 0, len = mainSubString.length(); i < len; i++) {
+            mainSpan.setSpan(new ForegroundColorSpan(getRandomColor()), i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             subSpin.setSpan(new ForegroundColorSpan(getRandomColor()), i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
+
         mainTextId.setText(mainSpan);
         mainSubText.setText(subSpin);
         firstComma.setTextColor(getRandomColor());
@@ -1472,7 +1635,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        super.onBackPressed();
         removeView();
     }
 }

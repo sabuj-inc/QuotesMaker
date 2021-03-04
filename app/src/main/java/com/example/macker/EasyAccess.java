@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,7 +25,7 @@ import java.io.FileOutputStream;
 import java.util.Calendar;
 
 public class EasyAccess {
-    private Context context;
+    Context context;
     private String positionString;
     private RelativeLayout screen;
 
@@ -135,5 +136,29 @@ public class EasyAccess {
 
     }
 
+    //data store background image
+    public void getCurrentBackground(int imagePosition) {
+        SharedPreferences store = context.getSharedPreferences("imagePosition", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = store.edit();
+        editor.putInt("imagePosition", imagePosition);
+        editor.commit();
+    }
+
+    public int setCurrentBackground() {
+        SharedPreferences store = context.getSharedPreferences("imagePosition", Context.MODE_PRIVATE);
+        return store.getInt("imagePosition", 0);
+    }
+    //data store background image
+    public void getCurrentFont(int fontPosition) {
+        SharedPreferences store = context.getSharedPreferences("fontPosition", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = store.edit();
+        editor.putInt("fontPosition", fontPosition);
+        editor.commit();
+    }
+
+    public int setCurrentFont() {
+        SharedPreferences store = context.getSharedPreferences("fontPosition", Context.MODE_PRIVATE);
+        return store.getInt("fontPosition", 0);
+    }
 
 }
