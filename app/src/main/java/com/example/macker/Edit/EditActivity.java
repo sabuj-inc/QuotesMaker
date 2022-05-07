@@ -330,7 +330,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         if (clickId == R.id.createBack) {
             Toast.makeText(this, "back", Toast.LENGTH_SHORT).show();
         } else if (clickId == R.id.createShare) {
-            easyAccess.imageSave(saveScreen, true);
+            Toast.makeText(this, "it's Work", Toast.LENGTH_SHORT).show();
+            //easyAccess.imageSave(saveScreen, true);
         } else if (clickId == R.id.createDownload) {
             easyAccess.imageSave(saveScreen, false);
         } else if (clickId == R.id.pictureListId) {
