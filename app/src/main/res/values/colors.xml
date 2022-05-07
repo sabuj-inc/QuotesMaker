@@ -7,11 +7,12 @@
     <!--create custom color-->
     <color name="propertyListColor">#DCD9D9</color>
     <color name="editSelectColor">#EFECEC</color>
-    <color name="iconColor">#504B4B</color>
+    <color name="iconColor">#8E8080</color>
     <color name="seekBarColor">#5A6A05</color>
     <color name="textColor">#504B4B</color>
     <color name="editHintColor">#7C6969</color>
     <color name="ex">#9A222020</color>
+    <color name="watermarkButtonColor">#E6D8D8</color>
 
 
 

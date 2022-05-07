@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F3F3"
-    tools:context=".MainActivity">
-
+    tools:context=".Edit.EditActivity">
+    <!--<sabu/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,37 +28,33 @@
                 <ImageView
                     android:id="@+id/createBack"
                     style="@style/createImageStyle"
-                    android:layout_margin="0dp"
-                    android:contentDescription="@string/app_name"
                     android:src="@drawable/back_icon" />
+                <TextView
+                    android:layout_toRightOf="@+id/createBack"
+                    android:text="@string/app_name"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <ImageView
                     android:id="@+id/createShare"
                     style="@style/createImageStyle"
-                    android:layout_margin="0dp"
-                    android:layout_toStartOf="@+id/createWallpaper"
-                    android:contentDescription="@string/app_name"
+                    android:layout_toStartOf="@id/createDownload"
                     android:src="@drawable/share_icon" />
 
                 <ImageView
-                    android:id="@+id/createWallpaper"
+                    android:id="@+id/createRefresh"
                     style="@style/createImageStyle"
-                    android:layout_margin="0dp"
-                    android:layout_toStartOf="@+id/createDownload"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/wallpaper_icon" />
+                    android:layout_toStartOf="@id/createShare"
+                    android:src="@drawable/refresh_icon" />
 
                 <ImageView
                     android:id="@+id/createDownload"
                     style="@style/createImageStyle"
                     android:layout_alignParentEnd="true"
-                    android:layout_margin="0dp"
-                    android:contentDescription="@string/app_name"
                     android:src="@drawable/download_icon" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
-
 
 
         <!--main canvas-->
@@ -75,7 +71,6 @@
                 android:id="@+id/saveScreen"
                 android:layout_width="match_parent"
                 android:layout_height="500dp">
-
 
 
                 <ImageView
@@ -113,48 +108,58 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp">
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp">
 
 
                             <TextView
                                 android:id="@+id/firstComma"
-                                style="@style/canvasTextViewStyle"
-                                android:layout_margin="5dp"
-                                android:text="@string/first_comma"
-                                android:textSize="23sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" ❛❛ "
+                                android:textColor="#fff"
+                                android:textSize="30dp"
                                 android:textStyle="bold" />
 
+                            <TextView
+                                android:id="@+id/secondComma"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/mainTextId"
+                                android:layout_alignParentRight="true"
+                                android:text=" ❟❟ "
+                                android:textColor="#fff"
+                                android:textSize="30dp"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/mainTextId"
-                                style="@style/canvasTextViewStyle"
+                                style="@style/defaultTxt"
+                                android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
-                                android:layout_marginLeft="13dp"
-                                android:layout_marginRight="13dp"
-                                android:text="@string/main_text"
-                                android:textAlignment="center"
-                                android:textSize="20sp" />
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:gravity="center"
+                                android:lineSpacingExtra="15dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="The name of our counttry is bd.it is fucking counttry in the world"
+                                android:textColor="#fff"
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:id="@+id/mainSubText"
-                                style="@style/canvasTextViewStyle"
-                                android:layout_below="@+id/mainTextId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/mainTextId"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="40dp"
                                 android:padding="5dp"
                                 android:text="@string/othore_name"
+                                android:textColor="#fff"
                                 android:textSize="@dimen/fifteen" />
 
-                            <TextView
-                                android:id="@+id/secondComma"
-                                style="@style/canvasTextViewStyle"
-                                android:layout_below="@id/mainTextId"
-                                android:layout_alignParentEnd="true"
-                                android:padding="15dp"
-                                android:text="@string/secend_comma"
-                                android:textSize="23sp"
-                                android:textStyle="bold" />
+
                         </RelativeLayout>
 
 
@@ -165,47 +170,41 @@
                 <!--watermark-->
                 <LinearLayout
                     android:id="@+id/watermarkGroup"
-                    android:layout_alignParentTop="true"
-                    android:gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="55dp">
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center">
 
-                    <ImageView
+
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/resultImage1"
-                        android:scaleType="fitXY"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="2dp"
+                        style="@style/watermarkImageForResult"
                         android:src="@drawable/facebook" />
-                    <ImageView
+
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/resultImage2"
-                        android:scaleType="fitXY"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="2dp"
+                        style="@style/watermarkImageForResult"
                         android:src="@drawable/instagram" />
-                    <ImageView
+
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/resultImage3"
-                        android:scaleType="fitXY"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="2dp"
+                        style="@style/watermarkImageForResult"
                         android:src="@drawable/twitter" />
 
                     <TextView
                         android:id="@+id/watermarkText"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="#fff"
-                        android:textSize="13sp"
-                        android:text="Best Quota and Status"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Best Quota and Status"
+                        android:textColor="#fff"
+                        android:textFontWeight="100"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
-
 
 
         <!--control section-->
@@ -313,42 +312,6 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/effectId"
-                        style="@style/createCardStyle">
-
-                        <LinearLayout style="@style/createControlLayoutStyle">
-
-                            <ImageView
-                                style="@style/createControlImageStyle"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/effect_icon" />
-
-                            <TextView
-                                style="@style/createSmallText"
-                                android:text="@string/effect" />
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/filterId"
-                        style="@style/createCardStyle">
-
-                        <LinearLayout
-
-                            style="@style/createControlLayoutStyle">
-
-                            <ImageView
-                                style="@style/createControlImageStyle"
-                                android:contentDescription="@string/app_name"
-                                android:src="@drawable/bg2" />
-
-                            <TextView
-                                style="@style/createSmallText"
-                                android:text="@string/filter" />
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
                         android:id="@+id/propertyId"
                         style="@style/createCardStyle">
 
@@ -397,7 +360,7 @@
                             <ImageView
                                 style="@style/createControlImageStyle"
                                 android:contentDescription="@string/app_name"
-                                android:src="@drawable/gallery_icon" />
+                                android:src="@drawable/watermark" />
 
                             <TextView
                                 style="@style/createSmallText"
@@ -545,11 +508,12 @@
             android:maxLines="2"
             android:minLines="2" />
 
-        <ImageView
-            android:id="@+id/editRandomTxt"
-            style="@style/createImageStyle"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/edit_rendomset_icon" />
+        <ListView
+            android:id="@+id/editTextListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:scrollbars="none" />
 
     </LinearLayout>
 
@@ -585,7 +549,9 @@
                     android:contentDescription="@string/app_name" />
             </LinearLayout>
         </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
+
 
     <!--color dialog-->
     <androidx.cardview.widget.CardView
@@ -593,7 +559,6 @@
         style="@style/createMainLayoutCardView"
         android:layout_height="400dp"
         android:visibility="gone">
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -654,7 +619,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/backgroundTextControl"
                 android:layout_marginBottom="50dp"
-                android:visibility="gone">
+                android:visibility="invisible">
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -697,233 +662,6 @@
                                 android:progress="100" />
                         </LinearLayout>
 
-
-                        <androidx.cardview.widget.CardView
-                            style="@style/createSubLayoutCardView"
-                            android:layout_width="match_parent">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="#FFFFFF"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/gradientCreateControl"
-                                    style="@style/createLayoutHeadText"
-                                    android:text="Create Own Gradient" />
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <LinearLayout
-                                        android:id="@+id/addColor1"
-                                        android:layout_width="50dp"
-                                        android:layout_height="70dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_margin="5dp"
-                                        android:background="@drawable/dot_background"
-                                        android:backgroundTintMode="add"
-                                        android:gravity="center">
-
-                                        <ImageView
-                                            android:id="@+id/addImage1"
-                                            android:layout_width="25sp"
-                                            android:layout_height="25sp"
-                                            android:background="@drawable/click_background"
-                                            android:src="@drawable/gradient_plus_icon" />
-                                    </LinearLayout>
-
-
-                                    <LinearLayout
-                                        android:id="@+id/addColor2"
-                                        android:layout_width="50dp"
-                                        android:layout_height="70dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_margin="5dp"
-                                        android:layout_toRightOf="@id/addColor1"
-                                        android:background="@drawable/dot_background"
-                                        android:backgroundTintMode="add"
-                                        android:gravity="center">
-
-                                        <ImageView
-                                            android:id="@+id/addImage2"
-                                            android:layout_width="25dp"
-                                            android:layout_height="25dp"
-                                            android:background="@drawable/click_background"
-                                            android:src="@drawable/gradient_plus_icon" />
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:id="@+id/addColor3"
-                                        android:layout_width="50dp"
-                                        android:layout_height="70dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_margin="5dp"
-                                        android:layout_toRightOf="@id/addColor2"
-                                        android:background="@drawable/dot_background"
-                                        android:backgroundTintMode="add"
-                                        android:gravity="center">
-
-                                        <ImageView
-                                            android:id="@+id/addImage3"
-                                            android:layout_width="25dp"
-                                            android:layout_height="25dp"
-                                            android:background="@drawable/click_background"
-                                            android:src="@drawable/gradient_plus_icon" />
-                                    </LinearLayout>
-
-                                    <LinearLayout
-
-                                        android:id="@+id/gradientPreviewId"
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_gravity="center"
-                                        android:layout_margin="5dp"
-                                        android:background="@drawable/dot_background"
-                                        android:backgroundTintMode="add"
-                                        android:orientation="vertical" />
-
-                                    <TextView
-                                        style="@style/createLayoutHeadText"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@+id/gradientPreviewId"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginRight="15dp"
-                                        android:text="Preview" />
-
-                                    <RelativeLayout
-                                        android:layout_width="180dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/addColor1">
-
-                                        <CheckBox
-                                            android:id="@+id/colorPositionChange"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerVertical="true"
-                                            android:checked="true" />
-
-                                        <TextView
-                                            style="@style/createLayoutHeadText"
-                                            android:layout_marginLeft="30dp"
-                                            android:text="Auto Position Change" />
-                                    </RelativeLayout>
-                                </RelativeLayout>
-
-
-                                <HorizontalScrollView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:scrollbars="none">
-
-                                    <FrameLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <LinearLayout
-                                            android:layout_width="4000dp"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <GridView
-                                                android:id="@+id/colorGridView"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:horizontalSpacing="2dp"
-                                                android:numColumns="99" />
-                                        </LinearLayout>
-                                    </FrameLayout>
-                                </HorizontalScrollView>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            style="@style/createLayoutHeadText"
-                                            android:text="Gradient Opacity" />
-
-                                        <SeekBar
-                                            android:id="@+id/gradientOpacity"
-                                            style="@style/createSeekBarStyle"
-                                            android:layout_width="match_parent"
-                                            android:progress="200" />
-
-                                    </LinearLayout>
-
-
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:gravity="center"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            style="@style/createLayoutHeadText"
-                                            android:text="Direction" />
-
-                                        <Spinner
-                                            android:id="@+id/gradientSpinner"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="40dp" />
-
-                                    </LinearLayout>
-
-
-                                </LinearLayout>
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp">
-
-                                    <RelativeLayout
-                                        android:layout_width="120dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true">
-
-                                        <CheckBox
-                                            android:id="@+id/gradientAutoApply"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerVertical="true" />
-
-                                        <TextView
-                                            style="@style/createLayoutHeadText"
-                                            android:layout_marginLeft="20dp"
-                                            android:text="Auto Apply" />
-                                    </RelativeLayout>
-
-                                    <Button
-                                        android:id="@+id/applyButton"
-                                        android:layout_width="150dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_margin="5dp"
-                                        android:background="@drawable/round_shap"
-                                        android:text="Apply"
-                                        android:textAllCaps="false" />
-                                </RelativeLayout>
-
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                        <!--create own gradient-->
-
-
                         <!--constance gradient-->
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -949,8 +687,7 @@
                                     android:layout_height="match_parent">
 
                                     <LinearLayout
-
-                                        android:layout_width="6000dp"
+                                        android:layout_width="7000dp"
                                         android:layout_height="match_parent"
                                         android:orientation="horizontal">
 
@@ -964,28 +701,11 @@
                                 </FrameLayout>
                             </HorizontalScrollView>
 
-                            <LinearLayout
-                                android:id="@+id/randomGradientId"
-                                android:layout_width="50dp"
-                                android:layout_height="80dp"
-                                android:layout_below="@id/select_gradient"
-                                android:layout_alignParentEnd="true"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginTop="5dp"
-                                android:background="#fff"
-                                android:backgroundTintMode="add"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:src="@drawable/gradient_plus_icon" />
-                            </LinearLayout>
-
                         </RelativeLayout>
 
                     </LinearLayout>
                 </ScrollView>
+
             </LinearLayout>
 
             <!--text color-->
@@ -993,7 +713,7 @@
                 android:id="@+id/mainColorText"
                 style="@style/createControlLayout"
                 android:layout_below="@id/backgroundTextControl"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     style="@style/createTitleTextStyle"
@@ -1010,39 +730,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                         <RelativeLayout
-                            android:id="@+id/multiColorText"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/fifty"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:paddingStart="@dimen/five"
-                                android:text="Multi Color" />
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/click_background"
-                                android:padding="5dp"
-                                android:src="@drawable/edit_rendomset_icon" />
-                        </RelativeLayout>
-
-                        <View
-                            android:layout_width="5dp"
-                            android:layout_height="match_parent"
-                            android:background="#DCDBDB" />
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/fifty"
-                            android:layout_weight="1">
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/fifty">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1076,7 +766,9 @@
                     android:contentDescription="@string/app_name" />
             </LinearLayout>
         </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
+
 
     <!--property dialog-->
     <androidx.cardview.widget.CardView
@@ -1331,8 +1023,19 @@
                                     android:id="@+id/customizeOpacity"
                                     style="@style/createSeekBarStyle" />
                             </LinearLayout>
+                            <LinearLayout style="@style/customizeLayout">
+                                <LinearLayout style="@style/customizeLayout">
 
+                                    <TextView
+                                        style="@style/customizeLayoutText"
+                                        android:text="@string/image_blur" />
 
+                                    <SeekBar
+                                        android:id="@+id/imageBlur"
+                                        style="@style/createSeekBarStyle"
+                                        android:max="100" />
+                                </LinearLayout>
+                            </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -1507,8 +1210,10 @@
                 style="@style/createLayoutHeadText"
                 android:text="@string/font" />
 
-            <ListView
-                android:id="@+id/fontListView"
+            <GridView
+                android:listSelector="@android:color/white"
+                android:numColumns="1"
+                android:id="@+id/fontGridView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fontTxt"
@@ -1526,136 +1231,12 @@
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-    <!--filter shadow-->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/filterLayout"
-        style="@style/createMainLayoutCardView"
-        android:layout_height="270dp">
 
-
-        <RelativeLayout style="@style/customizeLayout">
-
-            <ImageView
-                android:id="@+id/filterDisable"
-                style="@style/createImageStyle"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/disable_icon" />
-
-            <TextView
-                android:id="@+id/filterTxt"
-                style="@style/createLayoutHeadText"
-                android:text="@string/filter" />
-
-            <ImageView
-                android:id="@+id/filterSubmit"
-                style="@style/createImageStyle"
-                android:layout_alignParentEnd="true"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/check_icon" />
-
-            <HorizontalScrollView
-                android:id="@+id/colorFilter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/filterTxt"
-                android:layout_margin="@dimen/five"
-                android:scrollbars="none">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="6620dp"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <GridView
-                            android:id="@+id/colorFilterGridView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="4dp"
-                            android:columnWidth="70dp"
-                            android:horizontalSpacing="8dp"
-                            android:numColumns="86" />
-                    </LinearLayout>
-                </FrameLayout>
-            </HorizontalScrollView>
-
-            <SeekBar
-                android:id="@+id/filterSeekBar"
-                style="@style/createSeekBarStyle"
-                android:layout_width="match_parent"
-                android:layout_below="@id/colorFilter"
-                android:layout_centerInParent="false"
-                android:max="2000" />
-
-            <LinearLayout
-                android:id="@+id/filterClose"
-                style="@style/createCloseLayout">
-
-                <ImageView
-                    android:id="@+id/filterCloseIcon"
-                    style="@style/createCloseIcon"
-                    android:contentDescription="@string/app_name" />
-            </LinearLayout>
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-    <!--effect dialog-->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/effectLayout"
-        style="@style/createMainLayoutCardView"
-        android:layout_height="@dimen/twoHundredFifty">
-
-
-        <RelativeLayout style="@style/customizeLayout">
-
-            <TextView
-                android:id="@+id/effectTxt"
-                style="@style/createLayoutHeadText"
-                android:text="@string/effect" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/effectTxt">
-
-                <LinearLayout
-                    style="@style/customizeLayout"
-                    android:padding="@dimen/ten">
-
-                    <LinearLayout style="@style/customizeLayout">
-
-                        <TextView
-                            style="@style/customizeLayoutText"
-                            android:text="@string/image_blur" />
-
-                        <SeekBar
-                            android:id="@+id/imageBlur"
-                            style="@style/createSeekBarStyle"
-                            android:max="100" />
-                    </LinearLayout>
-                </LinearLayout>
-            </ScrollView>
-
-            <LinearLayout
-                android:id="@+id/effectClose"
-                style="@style/createCloseLayout">
-
-                <ImageView
-                    android:id="@+id/effectCloseIcon"
-                    style="@style/createCloseIcon"
-                    android:contentDescription="@string/app_name" />
-            </LinearLayout>
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
+    <!--watermark dialog-->
     <androidx.cardview.widget.CardView
         android:id="@+id/watermarkLayout"
         style="@style/createMainLayoutCardView"
-        android:layout_height="200dp"
+        android:layout_height="450dp"
         android:visibility="visible">
 
         <RelativeLayout
@@ -1668,129 +1249,238 @@
                 android:text="Watermark" />
 
 
-
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/watermarkSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:checked="true"
                 android:padding="@dimen/ten" />
-            <Button
-                android:id="@+id/watermarkSave"
-                android:layout_toLeftOf="@id/watermarkSwitch"
-                android:text="save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <!--fb twitter edit watermark-->
+
             <LinearLayout
-                android:gravity="center"
-                android:id="@+id/watermarkArea"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_below="@id/watermarkTxt">
-
-                <ImageView
-                    android:id="@+id/waterImage1"
-                    android:scaleType="fitXY"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="3dp"
-                    android:src="@drawable/facebook" />
-                <ImageView
-                    android:id="@+id/waterImage2"
-                    android:scaleType="fitXY"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="3dp"
-                    android:src="@drawable/instagram" />
-                <ImageView
-                    android:id="@+id/waterImage3"
-                    android:scaleType="fitXY"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="3dp"
-                    android:src="@drawable/twitter" />
-
-                <EditText
-                    android:id="@+id/watermarkEdit"
-                    android:drawableRight="@drawable/text_edit_icon"
-                    android:text="Best Quota and Status"
-                    android:textSize="13sp"
-                    android:elevation="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:padding="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/round_shap"
-                    />
-            </LinearLayout>
-
-            <!--watermark list view-->
-            <HorizontalScrollView
-                android:id="@+id/watermarkFontList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/watermarkArea"
-                android:layout_margin="@dimen/five"
-                android:scrollbars="none">
-
-                <FrameLayout
+                android:layout_below="@id/watermarkTxt"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="vertical">
+                <!--fb twitter edit watermark-->
+                <LinearLayout
+                    android:id="@+id/watermarkArea"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="55dp"
+                    android:gravity="center">
 
-                    <LinearLayout
-                        android:layout_width="6620dp"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/waterImage1"
+                        style="@style/watermarkImageForStatic"
+                        android:src="@drawable/facebook" />
 
-                        <GridView
-                            android:id="@+id/watermarkFontGridView"
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/waterImage2"
+                        style="@style/watermarkImageForStatic"
+                        android:src="@drawable/instagram" />
+
+                    <RelativeLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/waterImage3"
+                            style="@style/watermarkImageForStatic"
+                            android:src="@drawable/twitter" />
+
+                        <!--<ImageView
+                            android:id="@+id/waterImageEdit"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_margin="4dp"
-                            android:columnWidth="70dp"
-                            android:horizontalSpacing="8dp"
-                            android:numColumns="86" />
-                    </LinearLayout>
-                </FrameLayout>
-            </HorizontalScrollView>
+                            android:padding="5dp"
+                            android:src="@drawable/text_edit_icon" />-->
+                    </RelativeLayout>
 
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/watermarkFontList"
-                android:orientation="vertical"
-                android:padding="@dimen/ten">
-
-
-                <LinearLayout style="@style/customizeLayout">
-
-                    <TextView
-                        style="@style/customizeLayoutText"
-                        android:text="Text Color" />
-
-                    <com.divyanshu.colorseekbar.ColorSeekBar
-                        android:id="@+id/watermarkColor"
-                        style="@style/createColorSeekBar" />
+                    <EditText
+                        android:id="@+id/watermarkEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/round_shap"
+                        android:drawableRight="@drawable/text_edit_icon"
+                        android:elevation="1dp"
+                        android:fontFamily="sans-serif-light"
+                        android:padding="5dp"
+                        android:text="Best Quota and Status"
+                        android:textFontWeight="100"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
-                <LinearLayout style="@style/customizeLayout">
+                <!--watermark list view-->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/five"
+                    android:scrollbars="none">
 
-                    <TextView
-                        style="@style/customizeLayoutText"
-                        android:text="Opacity" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                    <SeekBar
-                        android:id="@+id/watermarkOpacity"
-                        style="@style/createSeekBarStyle"
-                        android:max="20" />
+                        <LinearLayout
+                            android:layout_width="4200dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <GridView
+                                android:id="@+id/watermarkFontGridView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:columnWidth="70dp"
+                                android:horizontalSpacing="5dp"
+                                android:listSelector="#fff"
+                                android:numColumns="43" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </HorizontalScrollView>
+
+                <!--text size and icon size-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <!--text style-->
+                    <androidx.cardview.widget.CardView
+                        style="@style/createSubLayoutCardView"
+                        android:layout_width="0dp"
+                        android:layout_weight="@dimen/onlyOne">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textSize"
+                                style="@style/createLayoutHeadText"
+                                android:text="Text Size" />
+
+
+                            <SeekBar
+                                android:id="@+id/watermarkTextSize"
+                                style="@style/createSeekBarStyle"
+                                android:layout_width="match_parent"
+                                android:max="100"
+                                android:min="25" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <!--icon size-->
+                    <androidx.cardview.widget.CardView
+                        style="@style/createSubLayoutCardView"
+                        android:layout_width="@dimen/zero"
+                        android:layout_weight="@dimen/onlyOne">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="75dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/iconSize"
+                                style="@style/createLayoutHeadText"
+                                android:text="Icon Size" />
+
+                            <SeekBar
+                                android:id="@+id/watermarkIconSize"
+                                style="@style/createSeekBarStyle"
+                                android:layout_width="match_parent"
+                                android:layout_below="@+id/iconSize"
+                                android:max="200"
+                                android:min="30" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <!--Text Color and Icon Color-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        style="@style/createSubLayoutCardView"
+                        android:layout_width="0dp"
+                        android:layout_weight="@dimen/onlyOne">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textColor"
+                                style="@style/createLayoutHeadText"
+                                android:text="Text Color" />
+
+
+                            <com.divyanshu.colorseekbar.ColorSeekBar
+                                android:id="@+id/watermarkColor"
+                                style="@style/createColorSeekBar"
+                                android:layout_width="match_parent" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        style="@style/createSubLayoutCardView"
+                        android:layout_width="@dimen/zero"
+                        android:layout_weight="@dimen/onlyOne">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/stackColor"
+                                style="@style/createLayoutHeadText"
+                                android:text="Icon Stack Color" />
+
+
+                            <com.divyanshu.colorseekbar.ColorSeekBar
+                                android:id="@+id/iconStackColor"
+                                style="@style/createColorSeekBar"
+                                android:layout_width="match_parent" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/ten">
+
+
+                    <!--opacity-->
+                    <LinearLayout style="@style/customizeLayout">
+
+                        <TextView
+                            style="@style/customizeLayoutText"
+                            android:text="Opacity" />
+
+                        <SeekBar
+                            android:id="@+id/watermarkOpacity"
+                            style="@style/createSeekBarStyle"
+                            android:max="20"
+                            android:progress="20" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
 
+
+            <!--watermark close-->
             <LinearLayout
                 android:id="@+id/watermarkClose"
                 style="@style/createCloseLayout">
